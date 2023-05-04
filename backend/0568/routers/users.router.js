@@ -7,7 +7,7 @@ const bcrypt = require("bcrypt");
 router.get("/", async (req, res) => {
 	const user = await UserModel.find();
 	res.status(200).json(user);
-});
+})
 
 router.get("/:id", async (req, res) => {
 	const { id } = req.params;
