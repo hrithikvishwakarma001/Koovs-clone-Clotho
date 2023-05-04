@@ -15,7 +15,9 @@ app.get("/", (req, res) => {``
 });
 
 app.use("/api/users", userRouter);
-app.use("/api/prods",prodRouter)
+
+app.use("/api/products",prodRouter)
+
 app.listen(3000, async () => {
 	try {
 		await connection;
@@ -25,3 +27,5 @@ app.listen(3000, async () => {
 	}
 	console.log("Server running on port http://localhost:3000");
 });
+
+

@@ -13,9 +13,9 @@ prodRouter.post("/add", async (req, res) => {
 
 //READ Data🆗
 prodRouter.get("/", async (req, res) => {
-  const query = req.query;
+//   const query = req.query;
   try {
-    const prods = await ProdModel.find(query);
+    const prods = await ProdModel.find();
     res.send(prods);
   } catch (err) {
     res.send(err.message);
