@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const connection = require("./db");
 const userRouter = require("./0568/routers/users.router");
+const adminRouter = require("./0568/routers/admin.router");
 const authentication = require("./0568/authentication/auth");
 const cors = require("cors");
 
@@ -14,6 +15,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/users", userRouter);
+app.use("/api/admin", adminRouter);
 
 app.listen(3000, async () => {
 	try {
