@@ -5,9 +5,9 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 router.get("/", async (req, res) => {
-	const user = await UserModel.find();
+	const user = await UserModel.find({});
 	res.status(200).json(user);
-})
+});
 
 router.get("/:id", async (req, res) => {
 	const { id } = req.params;
@@ -56,6 +56,30 @@ router.post("/login", async (req, res) => {
 		});
 	} catch (error) {
 		res.status(400).json({ err: error.message });
+	}
+});
+
+// router.patch("/:id", async (req, res) => {
+// 	const { id } = req.params;
+// 	const user = UserModel.findById(id);
+// 	if (!user) return res.status(400).json({ msg: "User not found" });
+// 	try {
+// 		await UserModel.findByIdAndUpdate(id, req.body);
+// 		res.status(200).json({ msg: "User updated successfully" });
+// 	} catch (error) {
+// 		res.status(500).json({ err: error.message });
+// 	}
+// });
+
+router.delete("/:id", async (req, res) => {
+	const { id } = req.params;
+	const user = UserModel.findById(id);
+	if (!user) return res.status(400).json({ msg: "User not found" });
+	try {
+		await UserModel.findByIdAndDelete(id);
+		res.status(200).json({ msg: "User deleted successfully" });
+	} catch (error) {
+		res.status(500).json({ err: error.message });
 	}
 });
 
