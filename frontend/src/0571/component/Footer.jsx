@@ -10,10 +10,13 @@ import {
     Button,
     Divider,
     Input,
+    Center,
   
     Flex,
   } from "@chakra-ui/react";
   import { FiArrowRight,FiArrowUp } from "react-icons/fi"
+  import { AiOutlineInstagram} from "react-icons/ai";
+import { FaFacebookF} from 'react-icons/fa';
   
   const ListHeader = ({ children }) => {
     return (
@@ -33,8 +36,8 @@ import {
   
   export default function Footer() {
     return (
-      <Box border="1px solid red" padding="20px" paddingLeft="50px" bg={"#E5E4E2"} color={"#6C7278"} marginBottom={"1px solid Pewter"}>
-        <Container as={Stack} maxW={"6xl"} py={10}>
+      <Box padding="0px" paddingLeft="0px" bg={"#E5E4E2"} color={"#6C7278"} marginBottom={"1px solid Pewter"}>
+        <Container as={Stack} maxW={"6xl"} py={10} padding="30px">
           <SimpleGrid display="grid" gridTemplateColumns={"repeat(4,1fr)"} spacing={5}>
             <Stack align={"flex-start"}>
               <ListHeader  >About</ListHeader>
@@ -67,9 +70,12 @@ import {
           
             <Box display="flex">
             <Input placeholder="Enter Your Email" padding={"10px 40px"} border="none" fontSize={14} fontWeight={500}/>
-           <Button _hover={{ bg: "black", color: "white", transition: "all .3s" }} marginLeft={"-40px"}  height="45px" padding={"14px"} border="none"> <FiArrowRight size={17} /></Button>
+           <Button _hover={{ bg: "black", color: "white", transition: "all .3s" }} marginLeft={"-40px"}  height="45px" padding={"14px"} border="none" bg="none"> <FiArrowRight size={17} /></Button>
             </Box>
-            <Button   _hover={{ bg: "black", color: "white", transform: "scale(1.2)", transition: "all .3s" }}  borderRadius={"50%"} height="45px" padding={"14px"} border="none"> <FiArrowUp size={17} /></Button>
+            <Box  >
+            <Button   _hover={{ bg: "black", color: "white", transform: "scale(1.2)", transition: "all .3s" }} marginTop={"20px"} marginLeft={"210px"}  borderRadius={"50%"} height="45px" padding={"14px"} border="none"> <FiArrowUp size={17} /></Button>
+            </Box>
+           
             </Stack>
            
           </SimpleGrid>
@@ -79,9 +85,26 @@ import {
 
          
         </Container>
-       <Box w="100%" height="100px" border="1px solid blue">
 
+        
+        <Box w="100%"  padding="25px" borderTop={"1px solid gray"} height="100px" display="flex" justifyContent={"space-between"} gap="20px" >
+       
+       
+       <Box    textAlign={"left"} display="flex" gap="10px" justifyContent={"space-evenly"}>
+
+     <FaFacebookF size={22}/>  <AiOutlineInstagram  size={25}/>
        </Box>
+
+       <Box  marginLeft={"18%"}><Text >© NEWBRAVE VENTURE PRIVATE LIMITED</Text>
+       </Box>
+       <Box   >
+      
+       <img style={{width:"90%"}} src="https://www.koovs.com/cdn/shop/files/payment-removebg-preview-01.png?v=1668333198&width=360" alt="" />
+       </Box>
+   
+      </Box>
+       
+      
 
       </Box>
     );

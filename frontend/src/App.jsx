@@ -3,14 +3,17 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 
 import './App.css'
-import * as dotenv from "dotenv"
-dotenv.config()
+import AllRoutes from './router/AllRoutes'
+import Navbar from './0571/component/Navbar'
+
 function App() {
-  const [count, setCount] = useState(0)
-console.log(process.env.mongo)
+ 
   return (
     <>
-   
+   <div>
+    <Navbar/>
+    <AllRoutes/>
+   </div>
       
     </>
   )

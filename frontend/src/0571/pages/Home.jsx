@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
-import { Box, Text, Header, Image, Button, background, Center, Heading } from "@chakra-ui/react"
+import { Box, Text, Image, Button, background, Center, Heading } from "@chakra-ui/react"
 
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 
 import { FiArrowRight } from "react-icons/fi"
-import Footer from '../component/Footer'
+import Footer from '../component/Footer';
+import Banner from '../component/Slider';
 const Home = () => {
   const [data, setdata] = useState(true)
   const responsive = {
@@ -75,8 +76,8 @@ const Home = () => {
     <>
       {/* Main Body */}
       <Box marginTop={"15px"} >
-        <Box border="1px solid blue" height="400px" >
-          Crousal Part
+        <Box  height="auto" >
+        <Banner/>
         </Box>
 
         <Box paddingLeft={"50px"} height="auto" > <Text textAlign={"left"} fontWeight={600} fontSize={30}>Shop Women's</Text></Box>
@@ -229,10 +230,55 @@ const Home = () => {
         </Carousel>
       </Box>
      
+      <Box paddingLeft={"50px"} height="90px" > <Text textAlign={"center"} fontWeight={400} fontSize={33}>Brands on koovs
+      </Text></Box>
+      <Box width="90%" margin="auto" display="grid" gridTemplateColumns={"repeat(7,1fr)"} padding="10px" gap="30px">
+        <img style={{width:"100%" }} src="https://www.koovs.com/cdn/shop/files/koovs_logo_for_brand_page-03.jpg?v=1668331785&width=360" alt="" />
+        <img style={{width:"100%" }} src="https://www.koovs.com/cdn/shop/files/essentials_logo-02.jpg?v=1668331830&width=360" alt="" />
+        <img style={{width:"100%" }} src="https://www.koovs.com/cdn/shop/files/kangol_logo-01.jpg?v=1668331868&width=360" alt="" />
+        <img style={{width:"100%" }} src="https://www.koovs.com/cdn/shop/files/brand_logo-01.png?v=1668331907&width=360" alt="" />
+        <img style={{width:"100%" }} src="https://www.koovs.com/cdn/shop/files/brand_logo-02.png?v=1668331923&width=360" alt="" />
+        <img style={{width:"100%" }} src="https://www.koovs.com/cdn/shop/files/Ball_logo.jpg?v=1668332152&width=360" alt="" />
+        <img style={{width:"100%" }} src="https://www.koovs.com/cdn/shop/files/logo-04.jpg?v=1668332188&width=360" alt="" />
+        <img style={{width:"100%" }} src="https://www.koovs.com/cdn/shop/files/logo-02.jpg?v=1668332226&width=360" alt="" />
+        <img style={{width:"100%" }} src="https://www.koovs.com/cdn/shop/files/brand_logos_n-08.jpg?v=1668332439&width=360" alt="" />
+        
+        <img style={{width:"100%" }} src="https://www.koovs.com/cdn/shop/files/brand_logos_n-07.jpg?v=1668332432&width=360" alt="" />
+        <img style={{width:"100%" }} src="https://www.koovs.com/cdn/shop/files/brand_logos_n-09.jpg?v=1668332464&width=360" alt="" />
+        <img style={{width:"100%" }} src="https://www.koovs.com/cdn/shop/files/brand_logos_3951c2d8-141f-43a4-8065-9cca52dac9dd.jpg?v=1668332482&width=360" alt="" />
+      </Box>
      
      
-     
-     
+     <Box width="100%" height="auto" padding="30px 0px" marginTop={"60px"} borderTop="1px solid gray" display="flex" justifyContent={"space-evenly"}>
+<Box  display="flex" gap="20px">
+<Box width="50%">
+  <img style={{width:"15%",marginTop:"20px"}} src="https://www.koovs.com/cdn/shop/files/delivery-truck.png?v=1668332734&width=360" alt="" /></Box>
+<Box textAlign={"left"} marginLeft={"-80px"} width="50%"><Text fontWeight={500} fontSize={19}>Free Shipping</Text>
+<Text marginTop={"-12px"}  fontWeight={400} fontSize={12}>For orders above INR 1500.</Text></Box>
+</Box>
+<Box display="flex" gap="20px" >
+<Box width="50%">
+  <img style={{width:"15%",marginTop:"20px"}} src="https://www.koovs.com/cdn/shop/files/money-back.png?v=1668332753&width=360" alt="" /></Box>
+<Box textAlign={"left"} marginLeft={"-80px"} width="50%"><Text fontWeight={500} fontSize={19}>Money Guarantee</Text>
+<Text marginTop={"-12px"}  fontWeight={400} fontSize={12}>Within 30 days for an exchange.</Text></Box>
+</Box>
+<Box  display="flex" gap="20px">
+<Box width="50%">
+  <img style={{width:"15%",marginTop:"20px"}} src="https://www.koovs.com/cdn/shop/files/customer-care.png?v=1668332773&width=360" alt="" /></Box>
+<Box textAlign={"left"} marginLeft={"-80px"} width="50%"><Text fontWeight={500} fontSize={19}>Online Support</Text>
+<Text marginTop={"-12px"}  fontWeight={400} fontSize={12}>10 AM - 6 PM, Mon - Sat</Text></Box>
+</Box>
+<Box  display="flex" gap="20px" >
+<Box width="50%">
+  <img style={{width:"15%",marginTop:"20px"}} src="https://www.koovs.com/cdn/shop/files/credit-card.png?v=1668332788&width=360" alt="" /></Box>
+<Box textAlign={"left"} marginLeft={"-80px"} width="50%"><Text fontWeight={500} fontSize={19}>Flexible Payment</Text>
+<Text marginTop={"-12px"}  fontWeight={400} fontSize={12}>Pay with Multiple Credit Cards</Text></Box>
+</Box>
+
+
+
+
+     </Box>
      
      
      
