@@ -1,5 +1,4 @@
 const express = require("express");
-// const { ProdModel } = require("../modals/users.modal");
 const {ProdModel}= require("../models/products.model")
 const prodRouter = express.Router();
 
@@ -23,7 +22,7 @@ prodRouter.get("/", async (req, res) => {
   }
 });
 
-//Update User🆗
+//Update Data🆗
 prodRouter.patch("/update/:id", async (req, res) => {
   const { id } = req.params;
   try {
@@ -34,7 +33,7 @@ prodRouter.patch("/update/:id", async (req, res) => {
   }
 });
 
-//Delete User🆗
+//Delete Data🆗
 prodRouter.delete("/delete/:id", async (req, res) => {
   const { id } = req.params;
   try {
