@@ -45,3 +45,10 @@
 -   `git branch -d <branch-name>` to delete a branch
 -   `git merge <branch-name>` to merge a branch to current branch
 -   `git status` to check the status of the repo
+
+> Endpoints for backend
+
+-  `GET /api/users` to get all users
+-  `GET /api/users/:id` to get a user by id
+-  `POST /api/users/register` to create a new user
+-  `POST /api/users/login` to login a user and get token
