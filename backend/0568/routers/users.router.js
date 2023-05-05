@@ -5,7 +5,9 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 router.get("/", async (req, res) => {
-	const user = await UserModel.find({});
+	console.log("requesting....")
+	const user = await UserModel.find();
+	console.log('👻 -> file: users.router.js:9 -> router.get -> user:', user)
 	res.status(200).json(user);
 });
 
@@ -59,19 +61,27 @@ router.post("/login", async (req, res) => {
 	}
 });
 
-// router.patch("/:id", async (req, res) => {
-// 	const { id } = req.params;
-// 	const user = UserModel.findById(id);
-// 	if (!user) return res.status(400).json({ msg: "User not found" });
-// 	try {
-// 		await UserModel.findByIdAndUpdate(id, req.body);
-// 		res.status(200).json({ msg: "User updated successfully" });
-// 	} catch (error) {
-// 		res.status(500).json({ err: error.message });
-// 	}
-// });
+router.patch("/update/:id", async (req, res) => {
+	const { id } = req.params;
+	const { password } = req.body;
+	const user = UserModel.findById(id);
+	if (!user) return res.status(400).json({ msg: "User not found" });
+	try {
+		bcrypt.hash(password, 5, async (err, hash) => {
+			if (err) {
+				res.status(500).json({ err: err.message });
+			} else {
+				req.body.password = hash;
+				await UserModel.findByIdAndUpdate(id, req.body);
+				res.send({ msg: "User updated successfully" });
+			}
+		});
+	} catch (error) {
+		res.status(500).json({ err: error.message });
+	}
+});
 
-router.delete("/:id", async (req, res) => {
+router.delete("/delete/:id", async (req, res) => {
 	const { id } = req.params;
 	const user = UserModel.findById(id);
 	if (!user) return res.status(400).json({ msg: "User not found" });

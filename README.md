@@ -48,7 +48,17 @@
 
 > Endpoints for backend
 
+### users
 -  `GET /api/users` to get all users
 -  `GET /api/users/:id` to get a user by id
 -  `POST /api/users/register` to create a new user
 -  `POST /api/users/login` to login a user and get token
+-  `PATCH /api/users/update/:id` to update a user by id
+-  `DELETE /api/users/delete/:id` to delete a user by id
+
+### products
+-  `GET /api/products` to get all products
+-  `GET /api/products/:id` to get a product by id
+-  `POST /api/products/create` to create a new product
+-  `PATCH /api/products/update/:id` to update a product by id
+-  `DELETE /api/products/delete/:id` to delete a product by id
