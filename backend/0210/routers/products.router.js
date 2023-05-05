@@ -3,11 +3,9 @@ const {ProdModel}= require("../models/products.model")
 const prodRouter = express.Router();
 
 // POST🆗
-prodRouter.post("/add", async (req, res) => {
-  const data = req.body;
-  const user = new ProdModel(data);
-  await user.save();
-
+prodRouter.post("/create", async (req, res) => {
+  const data = new ProdModel(req.body);
+  await data.save();
   res.send("Added the new product");
 });
 
