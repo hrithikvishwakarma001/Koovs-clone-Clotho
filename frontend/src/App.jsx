@@ -1,19 +1,11 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-
-import './App.css'
-import * as dotenv from "dotenv"
-dotenv.config()
+import NextUIAdminPage from "./0568";
+import "./App.css";
 function App() {
-  const [count, setCount] = useState(0)
-console.log(process.env.mongo)
-  return (
-    <>
-   
-      
-    </>
-  )
+	return (
+		<>
+			<NextUIAdminPage />
+		</>
+	);
 }
 
-export default App
+export default App;
