@@ -8,9 +8,11 @@ const AllRoutes = () => {
   return (
   <Routes>
     <Route path="/" element={<Home/>}/>
-    <Route path="/wishlist" element={<Wishlist/>}/>
+   <Route path="/wishlist" element={<Wishlist/>}/>
     <Route path="/productdetails" element={<ProductDetails/>}/>
-   
+    
+    
+
   </Routes>
   )
 }

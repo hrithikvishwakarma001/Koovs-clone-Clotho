@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 
-const prodSchema = new mongoose.Schema(
+const prodSchema =  mongoose.Schema(
     {
     title: {type: String, required: true},
     category: {type: String, required: true,unique: true},
@@ -13,4 +13,4 @@ const prodSchema = new mongoose.Schema(
 
 const ProdModel = mongoose.model("men", prodSchema)
 
-module.exports = ProdModel
+module.exports = {ProdModel}
