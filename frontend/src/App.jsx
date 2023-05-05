@@ -5,17 +5,21 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import AllRoutes from './router/AllRoutes'
 import Navbar from './0571/component/Navbar'
+import ProductDetails from './0571/pages/ProductDetails'
+
+
 
 function App() {
  
   return (
-    <>
+    
    <div>
     <Navbar/>
     <AllRoutes/>
+ 
    </div>
       
-    </>
+   
   )
 }
 
