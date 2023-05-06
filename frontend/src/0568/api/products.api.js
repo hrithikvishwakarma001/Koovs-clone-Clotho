@@ -8,7 +8,7 @@ const cache = {}
     if (cache[URL]) return cache[URL];
     const response = await axios.get(URL)
     cache[URL] = response.data
-    return response.data
+    return response.data.products
   } catch (error) {
     console.log(error)
   }
