@@ -1,4 +1,5 @@
-import { Button, Card, Input, Loading } from "@nextui-org/react";
+import { Button, Card, Input, Loading, Row, } from "@nextui-org/react";
+import Tables from './Table'
 import React from "react";
 export default function Cards() {
 	const [total, setTotal] = React.useState(4);
@@ -16,12 +17,16 @@ export default function Cards() {
 
 		try {
 			// let data = await ...
+			console.log(
+				"👻 -> file: Card.jsx:23 -> handleClick -> query:",
+				query
+			);
 		} catch (error) {
 			setResponse("Something went wrong! Please try again later.");
 		}
 	};
 	return (
-		<Card isHoverable variant='bordered' css={{ mw: "100%", mt: "50px" }}>
+		<Card isHoverable variant='bordered' css={{ mw: "100%" }}>
 			<Card.Body>
 				<Input
 					required
@@ -97,6 +102,17 @@ export default function Cards() {
 					<Loading type='points' color='warning' />
 				)}
 			</Card.Body>
+			{/* <Card.Footer isBlurred>
+				<Row
+					align='center'
+					justify='center'
+					css={{ display: "flex", justifyContent: "center",w:'100%' }}
+					gap={0}
+					
+				>
+					<Tables />
+				</Row>
+			</Card.Footer> */}
 		</Card>
 	);
 }

@@ -1,4 +1,4 @@
-import { Popover, User, Button, Grid } from "@nextui-org/react";
+import { Popover, User, Button, Grid, Tooltip } from "@nextui-org/react";
 import { UserTwitterCard } from "./UserTwitterCard";
 import { DeleteUser } from "./DeleteUser";
 
@@ -6,19 +6,14 @@ export default function App() {
 	return (
 		<Grid.Container gap={2} alignContent='center'>
 			<Grid>
-				<Popover>
-					<Popover.Trigger>
-						<User
-							as='button'
-							src='https://i.pravatar.cc/150'
-							name='Hrithik Vishwakarma'
-							description='Full-stack developer'
-						/>
-					</Popover.Trigger>
-					<Popover.Content css={{ px: "$4", py: "$2" }}>
-						<UserTwitterCard />
-					</Popover.Content>
-				</Popover>
+				<Tooltip placement='bottom' content={<UserTwitterCard />}>
+					<User
+						as='button'
+						src='https://i.pravatar.cc/150'
+						name='Hrithik Vishwakarma'
+						description='Full-stack developer'
+					/>
+				</Tooltip>
 			</Grid>
 			<Grid>
 				<Popover>

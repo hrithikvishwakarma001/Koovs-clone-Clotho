@@ -7,7 +7,6 @@ const bcrypt = require("bcrypt");
 router.get("/", async (req, res) => {
 	console.log("requesting....")
 	const user = await UserModel.find();
-	console.log('👻 -> file: users.router.js:9 -> router.get -> user:', user)
 	res.status(200).json(user);
 });
 
