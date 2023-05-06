@@ -1,4 +1,4 @@
-import { Get_Product_Success, Patch_product_success, Product_Failure, Product_Req, Product_Success, Delete_product_success } from "./actionTypes"
+import { Get_Product_Success, Patch_product_success, Product_Failure, Product_Req, Product_Success, Delete_product_success } from "./actionType"
 
 const initialState = {
     isLoading: false,
