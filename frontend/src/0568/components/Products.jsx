@@ -7,40 +7,47 @@ import {
 	Text,
 	Loading,
 } from "@nextui-org/react";
-import { StyledBadge } from "./StyledBadge";
-import { IconButton } from "./IconButton";
-import { EyeIcon } from "./EyeIcon";
-import { EditIcon } from "./EditIcon";
-import { DeleteIcon } from "./DeleteIcon";
+import { StyledBadge } from "./Table/StyledBadge";
+import { IconButton } from "./Table/IconButton";
+import { EyeIcon } from "./Table/EyeIcon";
+import { DeleteIcon } from "./Table/DeleteIcon";
+import { EditIcon } from "./Table/EditIcon";
+import getProducts from "../api/products.api";
 import React from "react";
-import { getUsers } from "../../api/users.api";
-export default function Tables() {
-	const [users, setUsers] = React.useState([]);
+// import { ProductsCard } from "../utils/ProductsCard";
+
+export default function Products() {
+	const [products, setProducts] = React.useState([]);
 	const columns = [
-		{ name: "USER", uid: "name" },
-		{ name: "GENDER", uid: "gender" },
-		{ name: "STATUS", uid: "status" },
+		{ name: "TITLE", uid: "title" },
+		{ name: "CATEGORY", uid: "category" },
+		{ name: "PRICE", uid: "price" },
 		{ name: "ACTIONS", uid: "actions" },
 	];
 
-	const renderCell = (user, columnKey) => {
-		const cellValue = user[columnKey];
+	const renderCell = (product, columnKey) => {
+		const cellValue = product[columnKey];
 		switch (columnKey) {
-			case "name":
+			case "title":
 				return (
 					<Col>
-						<Row>
-							<User
-								squared
-								src={"https://i.pravatar.cc/150"}
-								name={cellValue}
-								css={{ p: 0 }}>
-								{user.email}
-							</User>
-						</Row>
+						{/* <Tooltip
+							placement='left'
+							content={<ProductsCard product={product} />}> */}
+							<Row>
+								<User
+									zoomed
+									squared
+									src={product.image[0].src}
+									name={cellValue}
+									css={{ p: 0 }}>
+									{product._id}
+								</User>
+							</Row>
+						{/* </Tooltip> */}
 					</Col>
 				);
-			case "gender":
+			case "category":
 				return (
 					<Col>
 						<Row>
@@ -52,19 +59,26 @@ export default function Tables() {
 							<Text
 								b
 								size={13}
-								css={{ tt: "capitalize", color: "$accents7" }}>
-								{user._id}
+								css={{
+									tt: "capitalize",
+									bg: product?.swatches[0].colorCode,
+								}}>
+								{product?.swatches[0].colorCode}
 							</Text>
 						</Row>
 					</Col>
 				);
-			case "status":
+			case "price":
 				return (
 					<Col>
 						<Row>
 							<StyledBadge
-								type={user.createdAt ? "active" : "paused"}>
-								{user.createdAt}
+								type={
+									product.swatchesTotal % 2 == 0
+										? "paused"
+										: "active"
+								}>
+								{cellValue}
 							</StyledBadge>
 						</Row>
 					</Col>
@@ -77,17 +91,23 @@ export default function Tables() {
 							<Tooltip content='Details'>
 								<IconButton
 									onClick={() =>
-										console.log("View user", user.id)
+										console.log(
+											"View products",
+											product._id
+										)
 									}>
 									<EyeIcon size={20} fill='#979797' />
 								</IconButton>
 							</Tooltip>
 						</Col>
 						<Col css={{ d: "flex" }}>
-							<Tooltip content='Edit user'>
+							<Tooltip content='Edit products'>
 								<IconButton
 									onClick={() =>
-										console.log("Edit user", user._id)
+										console.log(
+											"Edit products",
+											product._id
+										)
 									}>
 									<EditIcon size={20} fill='#979797' />
 								</IconButton>
@@ -95,10 +115,10 @@ export default function Tables() {
 						</Col>
 						<Col css={{ d: "flex" }}>
 							<Tooltip
-								content='Delete user'
+								content='Delete products'
 								color='error'
 								onClick={() =>
-									console.log("Delete user", user._id)
+									console.log("Delete products", product._id)
 								}>
 								<IconButton>
 									<DeleteIcon size={20} fill='#FF0080' />
@@ -113,17 +133,17 @@ export default function Tables() {
 	};
 
 	const getdata = async () => {
-		let data = await getUsers();
-		console.log("👻 -> file: index.jsx:168 -> getdata -> data:", data);
-		setUsers(data);
+		let data = await getProducts();
+		setProducts(data);
 	};
 
 	React.useEffect(() => {
 		getdata();
 	}, []);
+	console.log(products);
 	return (
 		<Table
-			color='error'
+			color='warning'
 			aria-label='Example table with custom cells'
 			css={{
 				height: "auto",
@@ -140,29 +160,31 @@ export default function Tables() {
 					</Table.Column>
 				)}
 			</Table.Header>
-			{users ? (
-				<Table.Body items={users}>
-					{(item) => (
+			<Table.Body items={products}>
+				{(item) => {
+					return products ? (
 						<Table.Row
 							justify='center'
 							align='center'
 							key={item._id}>
-							{(columnKey) => (
-								<Table.Cell>
-									{renderCell(item, columnKey)}
-								</Table.Cell>
-							)}
+							{(columnKey) => {
+								return (
+									<Table.Cell>
+										{renderCell(item, columnKey)}
+									</Table.Cell>
+								);
+							}}
 						</Table.Row>
-					)}
-				</Table.Body>
-			) : (
-				<Loading type='spinner' color='currentColor' size='sm' />
-			)}
+					) : (
+						<Loading size='large' color='primary' />
+					);
+				}}
+			</Table.Body>
 			<Table.Pagination
 				shadow
 				noMargin
 				align='center'
-				rowsPerPage={3}
+				rowsPerPage={6}
 				onPageChange={(page) => console.log({ page })}
 			/>
 		</Table>

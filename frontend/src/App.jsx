@@ -1,6 +1,4 @@
-// import NextUIAdminPage from "./0568";
-
-import "./App.css";
+import NextUIAdminPage from "./0568";
 
 function App() {
   return (
