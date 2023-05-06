@@ -4,9 +4,13 @@ const prodRouter = express.Router();
 
 // POST🆗
 prodRouter.post("/create", async (req, res) => {
-  const data = new ProdModel(req.body);
+  try {
+    const data = new ProdModel(req.body);
   await data.save();
   res.send("Added the new product");
+  } catch (error) {
+    res.status(500).json({error: error.message});
+  }
 });
 
 //READ Data🆗
