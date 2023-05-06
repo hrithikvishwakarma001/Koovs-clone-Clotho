@@ -15,11 +15,15 @@ import { Link } from "react-router-dom";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [IsUserKnowPassword, setIsUserKnowPassword] = useState(false);
+  const [IsUserKnowPassword, setIsUserKnowPassword] = useState(true);
+
+  const HandleLogin = () => {
+    console.log(email, password);
+  };
 
   return (
     <div>
-      <Text fontSize={"34px"} lineHeight={"44px"}>
+      <Text fontSize={"34px"} lineHeight={"44px"} textAlign={"center"}>
         Log In
       </Text>
       <Center gap={"10px"} fontSize={"18px"} marginTop={"15px"}>
@@ -32,7 +36,7 @@ export default function Login() {
 
       <Flex id="login-main-div" margin={"30px"} gap={"40px"}>
         {IsUserKnowPassword ? (
-          <Box id="login-form-div" width={"50%"} >
+          <Box id="login-form-div" width={"50%"}>
             <VStack alignItems={"start"} gap={"10px"} marginBottom={"20px"}>
               <Text fontSize={"1.5rem"} lineHeight={"2rem"}>
                 Log In
@@ -63,14 +67,25 @@ export default function Login() {
                 color={"white"}
                 width={"100%"}
                 _hover={{ zoom: "110%" }}
+                onClick={HandleLogin}
               >
                 Sign In
               </Button>
 
-              <Button bg={"#3b5998"} color={"white"} width={"100%"} _hover={{"bg":"#627aad"}}>
+              <Button
+                bg={"#3b5998"}
+                color={"white"}
+                width={"100%"}
+                _hover={{ bg: "#627aad" }}
+              >
                 Sign in with Facebook
-                </Button>
-              <Button bg={"#dd4b39"} color={"white"} width={"100%"} _hover={{"bg":"#e46f61"}}>
+              </Button>
+              <Button
+                bg={"#dd4b39"}
+                color={"white"}
+                width={"100%"}
+                _hover={{ bg: "#e46f61" }}
+              >
                 Sign in with Google
               </Button>
             </VStack>
