@@ -1,15 +1,18 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { Box, Text, Image, Button, background, Center, Heading, SimpleGrid } from "@chakra-ui/react"
-
+import { useDispatch, useSelector } from "react-redux";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 
 import { FiArrowRight } from "react-icons/fi"
 import Footer from '../component/Footer';
 import Banner from '../component/Slider';
+import { getProduct } from '../../0035/Redux/ProductReducer/action';
 const Home = () => {
   const [data, setdata] = useState(true)
+
+
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -74,6 +77,14 @@ const Home = () => {
 
 
   ]
+ const dispatch=useDispatch()
+ const Data=useSelector(state=>state.ProductReducer.products)
+ console.log("Data",Data)
+
+useEffect(()=>{
+  dispatch(getProduct())
+},[])
+
 
 
   return (
@@ -266,7 +277,7 @@ const Home = () => {
 
 
 >
-  <SimpleGrid margin="auto" columns={{ sm: 1, md: 2, lg: 4 }} >
+  <SimpleGrid margin="auto"  columns={{ sm: 1, md: 2, lg: 4 }} >
 
     {arrival.map((e) => <Box _hover={{ transform: "scale(0.95)", transition: "all .5s", cursor: "pointer" }}>
       <img style={{ height: "400px" }} src={e.img} alt="" />

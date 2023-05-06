@@ -13,7 +13,7 @@ export const addProduct = (data) => (dispatch) => {
 
 export const getProduct = (paramObj) => (dispatch) => {
     dispatch({ type: Product_Req })
-    axios.get(`http://localhost:8080/MenKids`, paramObj).then((res) => {
+    axios.get(`http://localhost:3000/api/products`, paramObj).then((res) => {
         dispatch({ type: Get_Product_Success, payload: res.data })
     }).catch(() => {
         dispatch({ type: Product_Failure })
