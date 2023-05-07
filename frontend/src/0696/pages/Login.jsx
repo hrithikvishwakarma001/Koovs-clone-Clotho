@@ -8,17 +8,43 @@ import {
   HStack,
   Spacer,
   Box,
+  useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { auth } from "../api/auth";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isAuth, setIsAuth] = useState(false);
+  const [Token, setToken] = useState("");
   const [IsUserKnowPassword, setIsUserKnowPassword] = useState(true);
+  const toast = useToast();
 
-  const HandleLogin = () => {
+  const HandleLogin = async () => {
     console.log(email, password);
+    let res = await auth(email, password);
+    console.log(res);
+    if (res.token) {
+      setToken(res.token);
+      setIsAuth(true);
+      setEmail("");
+      setPassword("");
+      toast({
+        title: "Login Successful",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
+    }else{
+      toast({
+        title: "Login Failed",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
   };
 
   return (
@@ -43,12 +69,14 @@ export default function Login() {
               </Text>
               <Input
                 placeholder="Email"
+                type="email"
                 marginBottom={"20px"}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
               <Input
                 placeholder="Password"
+                type="password"
                 marginBottom={"20px"}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
