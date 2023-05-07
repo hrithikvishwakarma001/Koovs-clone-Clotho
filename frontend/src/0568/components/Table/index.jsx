@@ -6,14 +6,17 @@ import {
 	User,
 	Text,
 	Loading,
+	Progress,
+	Popover,
 } from "@nextui-org/react";
 import { StyledBadge } from "./StyledBadge";
 import { IconButton } from "./IconButton";
-import { EyeIcon } from "./EyeIcon";
 import { EditIcon } from "./EditIcon";
 import { DeleteIcon } from "./DeleteIcon";
 import React from "react";
-import { getUsers } from "../../api/users.api";
+import { deleteUser, getUsers } from "../../api/users.api";
+import UserEdit from "../UserEdit";
+import { DeleteButton } from "../../utils/DeleteButton";
 export default function Tables() {
 	const [users, setUsers] = React.useState([]);
 	const columns = [
@@ -22,7 +25,11 @@ export default function Tables() {
 		{ name: "STATUS", uid: "status" },
 		{ name: "ACTIONS", uid: "actions" },
 	];
-
+	const getdata = async () => {
+		let data = await getUsers();
+		// console.log(data);
+		setUsers(data);
+	};
 	const renderCell = (user, columnKey) => {
 		const cellValue = user[columnKey];
 		switch (columnKey) {
@@ -60,49 +67,54 @@ export default function Tables() {
 				);
 			case "status":
 				return (
-					<Col>
-						<Row>
-							<StyledBadge
-								type={user.createdAt ? "active" : "paused"}>
-								{user.createdAt}
-							</StyledBadge>
-						</Row>
+					<Col
+						css={{
+							d: "flex",
+							fd: "column",
+							gap: "0.5rem",
+							w: "auto",
+						}}>
+						<StyledBadge
+							type={user.createdAt ? "active" : "paused"}>
+							{user.createdAt}
+						</StyledBadge>
+						<StyledBadge
+							type={user.updatedAt ? "paused" : "active"}>
+							{user.createdAt}
+						</StyledBadge>
 					</Col>
 				);
 
 			case "actions":
+				// console.log("actions", getdata);
 				return (
 					<Row justify='center' align='center'>
 						<Col css={{ d: "flex" }}>
-							<Tooltip content='Details'>
-								<IconButton
-									onClick={() =>
-										console.log("View user", user.id)
-									}>
-									<EyeIcon size={20} fill='#979797' />
-								</IconButton>
-							</Tooltip>
-						</Col>
-						<Col css={{ d: "flex" }}>
 							<Tooltip content='Edit user'>
-								<IconButton
-									onClick={() =>
-										console.log("Edit user", user._id)
-									}>
-									<EditIcon size={20} fill='#979797' />
-								</IconButton>
+								<UserEdit user={user} getUsers={getdata} />
 							</Tooltip>
 						</Col>
 						<Col css={{ d: "flex" }}>
 							<Tooltip
 								content='Delete user'
-								color='error'
-								onClick={() =>
-									console.log("Delete user", user._id)
-								}>
-								<IconButton>
-									<DeleteIcon size={20} fill='#FF0080' />
-								</IconButton>
+								color='error'>
+								<Popover>
+									<Popover.Trigger>
+										<IconButton>
+											<DeleteIcon
+												size={20}
+												fill='#FF0080'
+											/>
+										</IconButton>
+									</Popover.Trigger>
+									<Popover.Content>
+										<DeleteButton
+											id={user._id}
+											getData={getdata}
+											deleteProduct={deleteUser}
+										/>
+									</Popover.Content>
+								</Popover>
 							</Tooltip>
 						</Col>
 					</Row>
@@ -112,16 +124,10 @@ export default function Tables() {
 		}
 	};
 
-	const getdata = async () => {
-		let data = await getUsers();
-		console.log("👻 -> file: index.jsx:168 -> getdata -> data:", data);
-		setUsers(data);
-	};
-
 	React.useEffect(() => {
 		getdata();
 	}, []);
-	return (
+	return users.length > 0 ? (
 		<Table
 			color='error'
 			aria-label='Example table with custom cells'
@@ -163,8 +169,17 @@ export default function Tables() {
 				noMargin
 				align='center'
 				rowsPerPage={3}
-				onPageChange={(page) => console.log({ page })}
+				// onPageChange={(page) => console.log({ page })}
 			/>
 		</Table>
+	) : (
+		<Progress
+			indeterminated
+			value={50}
+			size='xs'
+			striped
+			color='warning'
+			status='warning'
+		/>
 	);
 }

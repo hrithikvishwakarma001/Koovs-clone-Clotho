@@ -10,10 +10,20 @@ export default function CustomButton({ setData }) {
 				bordered='false'
 				css={{
 					mb: 50,
+					w: "100%",
+					justifyContent: "center",
+					alignItems: "center",
+					color: "black",
 				}}>
-				<Button onClick={() => setData("search")}>Search</Button>
-				<Button onClick={() => setData("users")}>Users</Button>
-				<Button onClick={() => setData("products")}>Products</Button>
+				<Button shadow onClick={() => setData("search")}>
+					Search
+				</Button>
+				<Button shadow onClick={() => setData("users")}>
+					Users
+				</Button>
+				<Button shadow onClick={() => setData("products")}>
+					Products
+				</Button>
 			</Button.Group>
 		</>
 	);

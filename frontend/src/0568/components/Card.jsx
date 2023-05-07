@@ -1,26 +1,28 @@
-import { Button, Card, Input, Loading, Row, } from "@nextui-org/react";
-import Tables from './Table'
+import { Button, Card, Input, Loading, Row } from "@nextui-org/react";
+import Tables from "./Table";
 import React from "react";
+import { searchByQuery } from "../api/users.api";
+import UserCard from "./UserCard";
 export default function Cards() {
-	const [total, setTotal] = React.useState(4);
 	const [query, setQuery] = React.useState("");
 	const [response, setResponse] = React.useState("");
-	const [loading, setLoading] = React.useState(true);
+	const [total, setTotal] = React.useState(0);
 	const setInput = (setter) => (e) => {
 		setter(e.target.value);
 	};
 	const handleClick = async () => {
-		if (query === "" || total <= 0) {
+		if (query === "") {
 			setResponse("Please enter a valid URL or length");
 			return;
 		}
 
 		try {
 			// let data = await ...
-			console.log(
-				"👻 -> file: Card.jsx:23 -> handleClick -> query:",
-				query
-			);
+			console.log(query);
+			const res = await searchByQuery(query);
+			console.log("👻 -> file: Card.jsx:22 -> handleClick -> res:", res);
+			setResponse(res);
+			setTotal(res.length);
 		} catch (error) {
 			setResponse("Something went wrong! Please try again later.");
 		}
@@ -44,15 +46,12 @@ export default function Cards() {
 								justifyContent: "center",
 							}}>
 							<Input
-								onChange={setInput(setTotal)}
+								readOnly
 								value={total}
 								labelLeft='Total'
-								width='100%'
+								width='80%'
 								type='number'
 								css={{ mb: "15px", mr: "20px" }}
-								// defaultValue={5}
-								// minLength={1}
-								// maxLength={10}
 							/>
 							<Button
 								onClick={handleClick}
@@ -66,37 +65,13 @@ export default function Cards() {
 					}
 					contentRightStyling={false}
 				/>
-				{!loading ? (
+				{response.length>0 ? (
 					<div
 						style={{
 							paddingLeft: "15px",
 							paddingRight: "15px",
 						}}>
-						{response &&
-							response.split("\n").map((item, i) => {
-								return i === 0 ? (
-									<p
-										key={i}
-										style={{
-											textAlign: "justify",
-											fontSize: "20px",
-											marginBottom: "20px",
-											fontWeight: "bold",
-										}}>
-										{item}
-									</p>
-								) : (
-									<p
-										key={i}
-										style={{
-											textAlign: "justify",
-											fontSize: "20px",
-											marginBottom: "20px",
-										}}>
-										{item}
-									</p>
-								);
-							})}
+						<UserCard data={response}/>
 					</div>
 				) : (
 					<Loading type='points' color='warning' />
