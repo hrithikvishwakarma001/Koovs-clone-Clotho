@@ -7,11 +7,11 @@ const prodSchema = mongoose.Schema(
 		image: { type: Array, required: true },
 		price: { type: String, required: true },
 		brandName: { type: String, required: true },
-		swatches:Array
+		swatches: Array,
 	},
 	{ versionKey: false }
 );
 
-const ProdModel = mongoose.model("men", prodSchema);
+const WomenModel = mongoose.model("women", prodSchema);
 
-module.exports = { ProdModel };
+module.exports = { WomenModel };
