@@ -6,15 +6,21 @@ import {
 	User,
 	Text,
 	Loading,
+	Progress,
+	Button,
+	Popover,
 } from "@nextui-org/react";
 import { StyledBadge } from "./Table/StyledBadge";
 import { IconButton } from "./Table/IconButton";
 import { EyeIcon } from "./Table/EyeIcon";
 import { DeleteIcon } from "./Table/DeleteIcon";
-import { EditIcon } from "./Table/EditIcon";
-import getProducts from "../api/products.api";
+import { getProducts, deleteProduct } from "../api/products.api";
 import React from "react";
 // import { ProductsCard } from "../utils/ProductsCard";
+import EditModal from "../components/EditProductModal";
+import { DeleteButton } from "../utils/DeleteButton";
+import ShowPreview from "./ShowPreview";
+import PostProduct from "./PostProduct";
 
 export default function Products() {
 	const [products, setProducts] = React.useState([]);
@@ -25,6 +31,11 @@ export default function Products() {
 		{ name: "ACTIONS", uid: "actions" },
 	];
 
+	const getdata = async () => {
+		let data = await getProducts();
+		setProducts(data.products);
+	};
+
 	const renderCell = (product, columnKey) => {
 		const cellValue = product[columnKey];
 		switch (columnKey) {
@@ -34,16 +45,16 @@ export default function Products() {
 						{/* <Tooltip
 							placement='left'
 							content={<ProductsCard product={product} />}> */}
-							<Row>
-								<User
-									zoomed
-									squared
-									src={product.image[0].src}
-									name={cellValue}
-									css={{ p: 0 }}>
-									{product._id}
-								</User>
-							</Row>
+						<Row>
+							<User
+								zoomed
+								squared
+								src={product.image[0].src}
+								name={cellValue}
+								css={{ p: 0 }}>
+								{product._id}
+							</User>
+						</Row>
 						{/* </Tooltip> */}
 					</Col>
 				);
@@ -89,40 +100,36 @@ export default function Products() {
 					<Row justify='center' align='center'>
 						<Col css={{ d: "flex" }}>
 							<Tooltip content='Details'>
-								<IconButton
-									onClick={() =>
-										console.log(
-											"View products",
-											product._id
-										)
-									}>
-									<EyeIcon size={20} fill='#979797' />
-								</IconButton>
+								<ShowPreview product={product} />
 							</Tooltip>
 						</Col>
 						<Col css={{ d: "flex" }}>
 							<Tooltip content='Edit products'>
-								<IconButton
-									onClick={() =>
-										console.log(
-											"Edit products",
-											product._id
-										)
-									}>
-									<EditIcon size={20} fill='#979797' />
-								</IconButton>
+								<EditModal
+									product={product}
+									getData={getdata}
+								/>
 							</Tooltip>
 						</Col>
 						<Col css={{ d: "flex" }}>
-							<Tooltip
-								content='Delete products'
-								color='error'
-								onClick={() =>
-									console.log("Delete products", product._id)
-								}>
-								<IconButton>
-									<DeleteIcon size={20} fill='#FF0080' />
-								</IconButton>
+							<Tooltip content='Delete products' color='error'>
+								<Popover>
+									<Popover.Trigger>
+										<IconButton>
+											<DeleteIcon
+												size={20}
+												fill='#FF0080'
+											/>
+										</IconButton>
+									</Popover.Trigger>
+									<Popover.Content>
+										<DeleteButton
+											id={product._id}
+											getData={getdata}
+											deleteProduct={deleteProduct}
+										/>
+									</Popover.Content>
+								</Popover>
 							</Tooltip>
 						</Col>
 					</Row>
@@ -132,16 +139,11 @@ export default function Products() {
 		}
 	};
 
-	const getdata = async () => {
-		let data = await getProducts();
-		setProducts(data);
-	};
-
 	React.useEffect(() => {
 		getdata();
 	}, []);
-	console.log(products);
-	return (
+	// console.log(products);
+	return products.length > 0 ? (
 		<Table
 			color='warning'
 			aria-label='Example table with custom cells'
@@ -151,18 +153,27 @@ export default function Products() {
 			}}
 			selectionMode='none'>
 			<Table.Header columns={columns}>
-				{(column) => (
-					<Table.Column
-						key={column.uid}
-						hideHeader={column.uid === "actions"}
-						align={column.uid === "actions" ? "center" : "start"}>
-						{column.name}
-					</Table.Column>
-				)}
+				{(column) => {
+					return column.uid === "actions" ? (
+						<Table.Column
+							key={column.uid}
+							css={{
+								d: "flex",
+								justifyContent: "center",
+								alignItems: "center",
+							}}>
+							<PostProduct getdata={getdata} />
+						</Table.Column>
+					) : (
+						<Table.Column key={column.uid} align='start'>
+							{column.name}
+						</Table.Column>
+					);
+				}}
 			</Table.Header>
 			<Table.Body items={products}>
 				{(item) => {
-					return products ? (
+					return (
 						<Table.Row
 							justify='center'
 							align='center'
@@ -175,8 +186,6 @@ export default function Products() {
 								);
 							}}
 						</Table.Row>
-					) : (
-						<Loading size='large' color='primary' />
 					);
 				}}
 			</Table.Body>
@@ -185,8 +194,17 @@ export default function Products() {
 				noMargin
 				align='center'
 				rowsPerPage={6}
-				onPageChange={(page) => console.log({ page })}
+				// onPageChange={(page) => console.log({ page })}
 			/>
 		</Table>
+	) : (
+		<Progress
+			indeterminated
+			value={50}
+			size='xs'
+			striped
+			color='warning'
+			status='warning'
+		/>
 	);
 }

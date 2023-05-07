@@ -5,9 +5,24 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 router.get("/", async (req, res) => {
-	console.log("requesting....")
-	const user = await UserModel.find();
-	res.status(200).json(user);
+	console.log("requesting....");
+	let { q } = req.query;
+	try {
+		const query = {};
+		if (q) {
+			query.$or = [
+				{ name: { $regex: q, $options: "i" } },
+				{ email: { $regex: q, $options: "i" } },
+				{ gender: { $regex: q, $options: "i" } },
+				{ _id: q},
+			];
+		}
+
+		const users = await UserModel.find(query);
+		res.status(200).json(users);
+	} catch (error) {
+		res.status(500).json({ err: error.message });
+	}
 });
 
 router.get("/:id", async (req, res) => {
@@ -18,7 +33,9 @@ router.get("/:id", async (req, res) => {
 
 router.post("/register", async (req, res) => {
 	const user = new UserModel(req.body);
-	const { password } = req.body;
+	const { password, email } = req.body;
+	const userCheck = await UserModel.findOne({ email });
+	if (userCheck) return res.status(400).json({ msg: "User already exists" });
 	try {
 		bcrypt.hash(password, 5, async (err, hash) => {
 			if (err) {
