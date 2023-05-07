@@ -9,6 +9,7 @@ import { FiArrowRight } from "react-icons/fi"
 import Footer from '../component/Footer';
 import Banner from '../component/Slider';
 import { getProduct } from '../../0035/Redux/ProductReducer/action';
+import { getProducts } from '../../0568/api/products.api';
 const Home = () => {
   const [data, setdata] = useState(true)
 
@@ -80,13 +81,23 @@ const Home = () => {
  const dispatch=useDispatch()
  const Data=useSelector(state=>state.ProductReducer.products)
  //console.log("hhh",Data)
-const newdata=Data.splice(4,8)
+ 
+ const newdata=Data.splice(4,8)
 const crousaldata=Data.slice(11,21)
 const newarrivalsdata=Data.slice(31,39)
 const mensdata=Data.slice(55,59)
 
+const getdata= async()=>{
+ try {
+  let res=await getProducts()
+  console.log(res.products)
+ } catch (error) {
+  console.log(error)
+ }
+}
+ 
 useEffect(()=>{
-  dispatch(getProduct())
+  getdata()
 },[])
 
 console.log(Data);

@@ -30,7 +30,7 @@ export const createUser = async (user) => {
 
 export const updateUser = async (id, user) => {
   try {
-    const response = await axios.patch(`${URL}/${id}`, user);
+    const response = await axios.patch(`${URL}/update/${id}`, user);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -39,9 +39,20 @@ export const updateUser = async (id, user) => {
 
 export const deleteUser = async (id) => {
   try {
-    const response = await axios.delete(`${URL}/${id}`);
+    const response = await axios.delete(`${URL}/delete/${id}`);
     return response.data;
   } catch (error) {
     console.log(error);
   }
 }
+
+export const searchByQuery = async (query) => {
+  try {
+    const response = await axios.get(`${URL}?q=${query}`);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+

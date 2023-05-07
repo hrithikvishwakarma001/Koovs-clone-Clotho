@@ -83,7 +83,7 @@ export default function Signup() {
             width={"100%"}
             _hover={{ bg: "Black", color: "White" }}
           >
-            <Link to={"login"}> Log In</Link>
+            <Link to={"/login"}> Log In</Link>
            
           </Button>
           <VStack width={"100%"} gap={"10px"}>

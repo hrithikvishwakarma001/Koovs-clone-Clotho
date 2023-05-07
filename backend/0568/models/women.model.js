@@ -7,6 +7,7 @@ const prodSchema = mongoose.Schema(
 		image: { type: Array, required: true },
 		price: { type: String, required: true },
 		brandName: { type: String, required: true },
+		swatches: Array,
 	},
 	{ versionKey: false }
 );

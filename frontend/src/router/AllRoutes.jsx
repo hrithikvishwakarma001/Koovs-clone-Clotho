@@ -5,6 +5,7 @@ import ProductDetails from '../0571/pages/ProductDetails'
 import Login from '../0696/pages/Login'
 import Signup from "../0696/pages/Signup"
 import NextUIAdminPage from "../0568";
+import ProductPage from "../0035/pages/Product"
 const AllRoutes = () => {
   return (
     <Routes>
@@ -14,6 +15,7 @@ const AllRoutes = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/admin/dashboard" element={<NextUIAdminPage />} />
+      <Route path="/product"  element={<ProductPage/>} />
     </Routes>
   )
 }
