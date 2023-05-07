@@ -20,9 +20,12 @@ prodRouter.get("/", async (req, res) => {
 			query.title = { $regex: q, $options: "i" };
 		}
 
+
 		if (category) {
 			query.category = { $regex: category, $options: "i" };
 		}
+
+
 
 		const totalCount = await ProdModel.countDocuments(query);
 		const totalPages = Math.ceil(totalCount / limit);
@@ -66,9 +69,11 @@ prodRouter.patch("/update/:id", async (req, res) => {
 	const { id } = req.params;
 	try {
 		await ProdModel.findByIdAndUpdate({ _id: id }, req.body);
+
 		res.send("product updated successfully ");
 	} catch (err) {
 	res.status(500).json({ success: false, message: "Failed to update product" });
+
 	}
 });
 
