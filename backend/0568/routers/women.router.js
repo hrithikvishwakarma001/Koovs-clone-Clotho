@@ -1,16 +1,16 @@
 const express = require("express");
-const { ProdModel } = require("../models/products.model");
-const prodRouter = express.Router();
+const {WomenModel} = require("../models/women.model")
+const WomenRouter = express.Router();
 
 // POST🆗
-prodRouter.post("/create", async (req, res) => {
-	const data = new ProdModel(req.body);
+WomenRouter.post("/create", async (req, res) => {
+	const data = new WomenModel(req.body);
 	await data.save();
 	res.send("Added the new product");
 });
 
 //READ Data🆗
-prodRouter.get("/", async (req, res) => {
+WomenRouter.get("/", async (req, res) => {
 	let { q, page, sort, order, limit, category } = req.query;
 	order = order === "asc" ? -1 : 1;
 	try {
@@ -20,17 +20,14 @@ prodRouter.get("/", async (req, res) => {
 			query.title = { $regex: q, $options: "i" };
 		}
 
-
 		if (category) {
 			query.category = { $regex: category, $options: "i" };
 		}
 
-
-
-		const totalCount = await ProdModel.countDocuments(query);
+		const totalCount = await WomenModel.countDocuments(query);
 		const totalPages = Math.ceil(totalCount / limit);
 
-		const products = await ProdModel.find(query)
+		const products = await WomenModel.find(query)
 			.sort({ [sort]: order })
 			.skip((page - 1) * limit)
 			.limit(limit);
@@ -51,10 +48,10 @@ prodRouter.get("/", async (req, res) => {
 	}
 });
 
-prodRouter.get("/:id", async (req, res) => {
+WomenRouter.get("/:id", async (req, res) => {
 	const { id } = req.params;
 	try {
-		const product = await ProdModel.findById(id);
+		const product = await WomenModel.findById(id);
 		res.json({
 			success: true,
 			message: "Product fetched successfully",
@@ -65,23 +62,24 @@ prodRouter.get("/:id", async (req, res) => {
 	}
 });
 //Update Data🆗
-prodRouter.patch("/update/:id", async (req, res) => {
+WomenRouter.patch("/update/:id", async (req, res) => {
 	const { id } = req.params;
 	try {
-		await ProdModel.findByIdAndUpdate({ _id: id }, req.body);
-
+		await WomenModel.findByIdAndUpdate({ _id: id }, req.body);
 		res.send("product updated successfully ");
 	} catch (err) {
-	res.status(500).json({ success: false, message: "Failed to update product" });
-
+		res.status(500).json({
+			success: false,
+			message: "Failed to update product",
+		});
 	}
 });
 
 //Delete Data🆗
-prodRouter.delete("/delete/:id", async (req, res) => {
+WomenRouter.delete("/delete/:id", async (req, res) => {
 	const { id } = req.params;
 	try {
-		await ProdModel.findByIdAndDelete({ _id: id });
+		await WomenModel.findByIdAndDelete({ _id: id });
 		res.send("Data Deleted successfully ");
 	} catch (err) {
 		console.log(err);
@@ -89,4 +87,4 @@ prodRouter.delete("/delete/:id", async (req, res) => {
 	}
 });
 
-module.exports = { prodRouter };
+module.exports = { WomenRouter };
