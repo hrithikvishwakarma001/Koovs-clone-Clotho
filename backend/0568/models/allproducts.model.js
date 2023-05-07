@@ -11,6 +11,6 @@ const prodSchema = mongoose.Schema(
 	{ versionKey: false }
 );
 
-const ProdModel = mongoose.model("men", prodSchema);
+const AllProductModel = mongoose.model("allproduct", prodSchema);
 
-module.exports = { ProdModel };
+module.exports = { AllProductModel };
