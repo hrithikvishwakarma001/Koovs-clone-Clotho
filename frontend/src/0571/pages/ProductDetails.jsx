@@ -11,13 +11,14 @@ export default function ProductDetails() {
   const pro = () => {
     setloading(true);
     axios
-      .get(`https://63c71d3cd307b76967472ac6.mockapi.io/products/${id}`)
+      .get(`https://diagnostic-boiled-shift.glitch.me/mens/${id}`)
       .then((res) => setdata(res.data))
       .catch((err) => console.log(err))
       .finally(() => {
         setloading(false);
       });
   };
+  console.log("dataPrrr",data)
   useEffect(() => {
     pro();
   }, []);
