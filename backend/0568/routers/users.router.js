@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
 				{ name: { $regex: q, $options: "i" } },
 				{ email: { $regex: q, $options: "i" } },
 				{ gender: { $regex: q, $options: "i" } },
-				{ _id: q},
+				// { _id: q},
 			];
 		}
 
