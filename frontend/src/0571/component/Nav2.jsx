@@ -30,17 +30,12 @@ import { useMediaQuery } from '@chakra-ui/react'
 import { AiOutlineStar } from "react-icons/ai"
 import { BsFillPersonFill } from "react-icons/bs"
 import Logo from "../Img/logo.png"
+import { useNavigate} from "react-router-dom";
+
 export default function WithSubnavigation() {
   const { isOpen, onToggle } = useDisclosure();
 
-  // single media query with no options
-
-  // ssr-friendly media query with fallback
-  const [isLargerThan800] = useMediaQuery('(min-width: 1400px)', {
-    ssr: true,
-    fallback: false, // return false on the server, and re-evaluate on the client side
-  })
-  console.log(isLargerThan800);
+  let navigate = useNavigate();
   return (
     <>
 
@@ -53,7 +48,9 @@ export default function WithSubnavigation() {
           <Box display="flex">
             <Center><FaFacebookF size={16} /> <Text _hover={{ cursor: "pointer" }} marginLeft="5px" marginRight="15px" fontSize={15} >1.8M Followers</Text> <AiOutlineInstagram size={17} /> <Text fontSize={15} marginLeft="5px" _hover={{ cursor: "pointer" }}>628k Followers</Text></Center>
           </Box>
-          <Box marginLeft={"16%"}> <Text _hover={{ cursor: "pointer" }} fontSize={15}>Open doors to a world of fashion | Young and fresh</Text></Box>
+          <Box marginLeft={"16%"}> <Text _hover={{ cursor: "pointer" }} fontSize={15}>Open doors to a world of fashion | Young and fresh</Text>
+         
+          </Box>
           <Box marginLeft={"30%"}>
 
             <Center>
@@ -116,10 +113,10 @@ export default function WithSubnavigation() {
             spacing={4}>
 
             <BiSearch size={25} />
-            <BsFillPersonFill size={25} />
+           <Box onClick={() => navigate("#signup")}><BsFillPersonFill size={25} /></Box> 
             <Box onClick={() => navigate("/wishlist")} display="flex" alignItems={"center"} _hover={{ cursor: "pointer" }}> <AiOutlineStar size={25} /><Text textAlign={"center"} background="#F16648" borderRadius={"50%"} marginTop={"-10px"} marginLeft={"-6px"} width="20px" height="20px" fontSize={14} color="white" fontWeight={600}>1</Text></Box>
 
-            <Box onClick={() => navigate("/wishlist")} _hover={{ cursor: "pointer" }} display="flex" alignItems={"center"}> <BiShoppingBag size={25} /><Text textAlign={"center"} background="#F16648" borderRadius={"52%"} marginTop={"-10px"} marginLeft={"-6px"} width="20px" height="20px" fontSize={14} color="white" fontWeight={600}>1</Text></Box>
+            <Box onClick={() => navigate("#cart")} _hover={{ cursor: "pointer" }} display="flex" alignItems={"center"}> <BiShoppingBag size={25} /><Text textAlign={"center"} background="#F16648" borderRadius={"52%"} marginTop={"-10px"} marginLeft={"-6px"} width="20px" height="20px" fontSize={14} color="white" fontWeight={600}>1</Text></Box>
 
 
 

@@ -79,7 +79,7 @@ const Home = () => {
   ]
  const dispatch=useDispatch()
  const Data=useSelector(state=>state.ProductReducer.products)
- 
+ //console.log("hhh",Data)
 const newdata=Data.splice(4,8)
 const crousaldata=Data.slice(11,21)
 const newarrivalsdata=Data.slice(31,39)
