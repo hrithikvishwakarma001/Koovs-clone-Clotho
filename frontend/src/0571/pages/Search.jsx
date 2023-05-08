@@ -13,13 +13,14 @@ import {
 } from '@chakra-ui/react'
 import Logo from "../Img/logo2.png"
 import { BASEURL } from "../../0568/utils/index";
+import axios from "axios"
 
 import {
     FormControl,
     FormLabel,
     FormErrorMessage,
     FormHelperText,
-    } from '@chakra-ui/react'
+} from '@chakra-ui/react'
 import { BiChevronDown, BiSearch, BiShoppingBag } from "react-icons/bi"
 import { useMediaQuery } from '@chakra-ui/react'
 import { AiOutlineStar } from "react-icons/ai"
@@ -29,11 +30,11 @@ import { searchByQuery } from "../../0568/api/users.api";
 
 const Search = () => {
     const URL = `${BASEURL}/products/all`;
-   //  console.log("UU",URL)
+    //  console.log("UU",URL)
     const [query, setQuery] = React.useState("");
     const [response, setResponse] = React.useState("");
- 
-    
+
+
 
 
 
@@ -54,12 +55,23 @@ const Search = () => {
     const setInput = (setter) => (e) => {
         setter(e.target.value);
     };
+
+    const searchByQuery = async (query) => {
+        try {
+            const response = await axios.get(`${URL}?q=${query}`);
+            return response.data;
+        } catch (error) {
+            console.log(error);
+        }
+    }
     const handleClick = async (e) => {
         e.preventDefault()
+        console.log("query",query)
         if (query === "") {
             setResponse("Please enter a valid URL or length");
             return;
         }
+       
 
         try {
             // let data = await ...
@@ -67,24 +79,18 @@ const Search = () => {
             const res = await searchByQuery(query);
             // console.log("👻 -> file: Card.jsx:22 -> handleClick -> res:", res);
             setResponse(res);
-            setTotal(res.length);
+            
+            
         } catch (error) {
             setResponse("Something went wrong! Please try again later.");
         }
 
-        const searchByQuery = async (query) => {
-            try {
-              const response = await axios.get(`${URL}?query=${query}`);
-              return response.data;
-            } catch (error) {
-              console.log(error);
-            }
-          }
-    
-        
-    };
+       
 
-     console.log("resss",response)
+
+    }
+
+    console.log("resss", response)
     return (
         <>
             <Button
@@ -107,14 +113,16 @@ const Search = () => {
 
                         <SimpleGrid w="100%" columns={{ sm: 1, md: 2, lg: 3 }} >
 
-                            <Box><Image marginLeft={10} w="35%" src={Logo} /></Box>
-                            <Box w="50%">  <form onSubmit={handleClick}>
+                            <Box >
+                                <Center> <Image marginLeft={1} w="35%" src={Logo} /></Center>
+                            </Box>
+                            <Box margin="auto" width={{ sm: "30%", md: "20%", lg: "50%" }}>  <form onSubmit={handleClick}>
 
                                 <Input
                                     onChange={setInput(setQuery)}
                                     value={query}
 
-                                    marginLeft={-20} w="300%" placeholder='Search here' />
+                                    marginLeft={-40} w="270%" placeholder='Search here' />
 
                             </form></Box>
 
