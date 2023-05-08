@@ -28,7 +28,7 @@ export const CartProductMeta = (props) => {
         <Stack spacing="0.5">
           <Text fontWeight="medium">{name}</Text>
           <Text color={mode('gray.600', 'gray.400')} fontSize="sm">
-            {description}
+            #{description}
           </Text>
         </Stack>
         {isGiftWrapping && (
