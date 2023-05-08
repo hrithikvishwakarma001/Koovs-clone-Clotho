@@ -19,7 +19,7 @@ export default function EditModal({ product, getData }) {
 		setVisible(false);
 		const update = await updateProduct(product._id, data);
 		getData();
-		console.log(update);
+		// console.log(update);
 	};
 
 	const handleChange = (e) => {
@@ -39,7 +39,6 @@ export default function EditModal({ product, getData }) {
 				<EditIcon size={20} fill='#979797' />
 			</IconButton>
 			<Modal
-				blur
 				closeButton
 				aria-labelledby='modal-title'
 				open={visible}

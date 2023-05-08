@@ -1,10 +1,12 @@
 import { Text, Button, Grid, Row } from "@nextui-org/react";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export const DeleteButton = ({ id, getData, deleteProduct }) => {
 	const handleClick = async () => {
 		let res = await deleteProduct(id);
 		// console.log(res);
 		getData();
+		toast.success("User Deleted Successfully");
 	};
 	return (
 		<Grid.Container

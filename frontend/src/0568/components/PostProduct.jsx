@@ -2,7 +2,8 @@ import React from "react";
 import { Modal, Button, Text, Input } from "@nextui-org/react";
 import CustomSelect from "../utils/CustomSelect";
 import { addProduct } from "../api/products.api";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export default function PostProduct({ getdata }) {
 	const [visible, setVisible] = React.useState(false);
 	const [data, setData] = React.useState({
@@ -34,7 +35,7 @@ export default function PostProduct({ getdata }) {
 			brandName === "" ||
 			swatches[0].colorCode === ""
 		) {
-			alert("Please fill all the fields");
+			toast.error("Please fill all the fields");
 			return;
 		}
 
@@ -49,6 +50,7 @@ export default function PostProduct({ getdata }) {
 			brandName: "",
 			swatches: [{ colorCode: "" }],
 		});
+		toast.success("Product Added Successfully");
 	};
 
 	const handleChange = (e) => {
@@ -69,6 +71,7 @@ export default function PostProduct({ getdata }) {
 			<Button auto size='sm' color='success' shadow onClick={handler}>
 				Add Product
 			</Button>
+			<ToastContainer />
 			<Modal
 				blur
 				closeButton
@@ -140,14 +143,14 @@ export default function PostProduct({ getdata }) {
 							data.title === "" ||
 							data.category === "" ||
 							data.image[0].src === "" ||
+							data.image[0].dataAltImage === "" ||
 							data.price === "" ||
 							data.brandName === "" ||
 							data.swatches[0].colorCode === ""
 								? "error"
 								: "success"
 						}
-						shadow
-						>
+						shadow>
 						Add
 					</Button>
 				</Modal.Footer>
