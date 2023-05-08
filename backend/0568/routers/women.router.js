@@ -2,14 +2,14 @@ const express = require("express");
 const {WomenModel} = require("../models/women.model")
 const WomenRouter = express.Router();
 
-// POST🆗
+
 WomenRouter.post("/create", async (req, res) => {
 	const data = new WomenModel(req.body);
 	await data.save();
 	res.send("Added the new product");
 });
 
-//READ Data🆗
+
 WomenRouter.get("/", async (req, res) => {
 	let { q, page, sort, order, limit, category } = req.query;
 	order = order === "asc" ? -1 : 1;
@@ -61,7 +61,7 @@ WomenRouter.get("/:id", async (req, res) => {
 		res.json({ success: false, message: "Failed to fetch product" });
 	}
 });
-//Update Data🆗
+
 WomenRouter.patch("/update/:id", async (req, res) => {
 	const { id } = req.params;
 	try {
@@ -75,7 +75,7 @@ WomenRouter.patch("/update/:id", async (req, res) => {
 	}
 });
 
-//Delete Data🆗
+
 WomenRouter.delete("/delete/:id", async (req, res) => {
 	const { id } = req.params;
 	try {

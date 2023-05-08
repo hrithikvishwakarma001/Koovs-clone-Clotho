@@ -2,14 +2,14 @@ const express = require("express");
 const { AllProductModel } = require("../models/allproducts.model");
 const allProductRouter = express.Router();
 
-// POST🆗
+
 allProductRouter.post("/create", async (req, res) => {
 	const data = new AllProductModel(req.body);
 	await data.save();
 	res.send("Added the new product");
 });
 
-//READ Data🆗
+
 allProductRouter.get("/", async (req, res) => {
 	let { q, page, sort, order, limit, category } = req.query;
 	order = order === "asc" ? -1 : 1;
@@ -61,7 +61,7 @@ allProductRouter.get("/:id", async (req, res) => {
 		res.json({ success: false, message: "Failed to fetch product" });
 	}
 });
-//Update Data🆗
+
 allProductRouter.patch("/update/:id", async (req, res) => {
 	const { id } = req.params;
 	try {
@@ -75,7 +75,7 @@ allProductRouter.patch("/update/:id", async (req, res) => {
 	}
 });
 
-//Delete Data🆗
+
 allProductRouter.delete("/delete/:id", async (req, res) => {
 	const { id } = req.params;
 	try {
