@@ -1,5 +1,6 @@
 import axios from "axios"
-const URL = "http://localhost:3000/api/products/all"
+import { BASEURL } from "../utils";
+const URL = `${BASEURL}/products/all`;
 
  const getProducts = async () => {
   try {

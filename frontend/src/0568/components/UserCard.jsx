@@ -1,7 +1,6 @@
 import { Card, Grid, Row, Text } from "@nextui-org/react";
 
 export default function UserCard({ data }) {
-	console.log("👻 -> file: UserCard.jsx:4 -> UserCard -> data:", data);
 
 const images = [
 	"https://cdn.dribbble.com/userupload/3990383/file/original-94bad88747d2c5db8c5bbdafb1144a9a.jpg?compress=1&resize=1200x900",

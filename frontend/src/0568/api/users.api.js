@@ -1,5 +1,6 @@
 import axios from "axios";
-const URL = "http://localhost:3000/api/users";
+import { BASEURL } from "../utils";
+const URL = `${BASEURL}/users`;
 
 export const getUsers = async () => {
 	try {
