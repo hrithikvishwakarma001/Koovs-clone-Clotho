@@ -1,5 +1,8 @@
 import axios from "axios";
-const URL = "https://clothoapi.onrender.com/api/users";
+import { BASEURL } from "../../0568/utils";
+const URL = `${BASEURL}/users`;
+
+
 const auth = async (email, password) => {
   try {
     let res = await axios.post(`${URL}/login`, { email, password });
