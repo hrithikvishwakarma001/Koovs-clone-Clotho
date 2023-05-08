@@ -8,6 +8,9 @@ const cors = require("cors");
 const { prodRouter } = require("./0210/routers/products.router");
 const { WomenRouter } = require("./0568/routers/women.router");
 const { allProductRouter } = require("./0568/routers/allproducts.router");
+const { orderRouter } = require("./0568/routers/order.router");
+const { cartRouter } = require("./0568/routers/cart.router");
+const cartMiddleware = require("./0568/middleware/cart.middleware");
 require("dotenv").config();
 app.use(express.json());
 app.use(cors());
@@ -23,6 +26,8 @@ app.use("/api/admin", adminRouter);
 app.use("/api/products/men", prodRouter);
 app.use("/api/products/women", WomenRouter);
 app.use("/api/products/all", allProductRouter);
+app.use("/api/orders", authentication, orderRouter);
+app.use("/api/cart", cartMiddleware, cartRouter);
 
 app.listen(3000, async () => {
 	try {

@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-const auth = (req, res, next) => {
+const cartMiddleware = (req, res, next) => {
 	const token = req.headers.authorization;
 	if (!token) return res.status(400).json({ msg: "Token not found" });
 	jwt.verify(token.split(" ")[1], "secret", (err, decoded) => {
@@ -12,7 +12,7 @@ const auth = (req, res, next) => {
 				"👻 -> file: auth.js:11 -> jwt.verify -> decoded:",
 				decoded
 			);
-			req.body.userInfo = decoded.userInfo;
+			req.body.userId = decoded.userInfo._id;
 			next();
 		} else {
 			res.status(400).json({ msg: "Invalid token" });
@@ -20,4 +20,4 @@ const auth = (req, res, next) => {
 	});
 };
 
-module.exports = auth;
+module.exports = cartMiddleware;
