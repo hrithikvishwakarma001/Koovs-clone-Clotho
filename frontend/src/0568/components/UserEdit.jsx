@@ -46,7 +46,7 @@ export default function UserEdit({ user, getUsers }) {
 				onClose={closeHandler}>
 				<Modal.Header>
 					<Text id='modal-title' size={18}>
-						product ID &nbsp;
+						user ID &nbsp;
 						<Text b size={18}>
 							#{data._id}
 						</Text>
