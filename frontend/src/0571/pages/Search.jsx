@@ -98,7 +98,7 @@ const Search = () => {
                 <BiSearch size={25} />
             </Button>
 
-            <Modal size={30} isOpen={isOpen} onClose={onClose}>
+            <Modal  size={30} isOpen={isOpen} onClose={onClose}>
                 {overlay}
                 <ModalContent mt={"-0.5%"}>
 
@@ -107,19 +107,21 @@ const Search = () => {
 
                         <SimpleGrid w="100%" columns={{ sm: 1, md: 2, lg: 3 }} >
 
-                            <Box><Image marginLeft={10} w="35%" src={Logo} /></Box>
-                            <Box w="50%">  <form onSubmit={handleClick}>
+                            <Box >
+                                <Center> <Image marginLeft={1} w="35%" src={Logo} /></Center>
+                               </Box>
+                            <Box margin="auto"  width={{sm:"30%" , md:"20%",lg:"50%"}}>  <form onSubmit={handleClick}>
 
                                 <Input
                                     onChange={setInput(setQuery)}
                                     value={query}
 
-                                    marginLeft={-20} w="300%" placeholder='Search here' />
+                                    marginLeft={-40} w="270%" placeholder='Search here' />
 
                             </form></Box>
 
 
-                            <Box marginRight={10} mt={2}>
+                            <Box  marginRight={10} mt={2}>
                                 <Stack
 
                                     flex={{ base: 1, md: 0 }}

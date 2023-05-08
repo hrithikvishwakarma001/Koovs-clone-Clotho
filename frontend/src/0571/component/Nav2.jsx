@@ -50,7 +50,7 @@ export default function WithSubnavigation() {
 
       <Box 
        display={{sm:"none" , md:"block"}}
-      borderBottom="1px solid gray" width="100%" height="40%" paddingBottom={"4px"} paddingTop={"15px"}>
+      borderBottom="1px solid lightgray" width="100%" height="40%" paddingBottom={"4px"} paddingTop={"15px"}>
 
 
         <Box display="flex" marginTop={"-5px"} paddingBottom="10px" paddingLeft={"50px"} paddingRight={"40px"} >
