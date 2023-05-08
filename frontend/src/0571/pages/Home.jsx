@@ -11,7 +11,8 @@ import Banner from '../component/Slider';
 import { getProduct } from '../../0035/Redux/ProductReducer/action';
 import { getProducts } from '../../0568/api/products.api';
 import { AiOutlineStar } from "react-icons/ai"
-
+import axios from 'axios';
+import toast, { Toaster } from 'react-hot-toast';
 const Home = () => {
   const [data, setdata] = useState(true)
   const [dis, setdis] = useState(false)
@@ -115,11 +116,23 @@ const Home = () => {
   }, [])
 
   //console.log(Data);
-  const handlewishlist = () => {
-
+  const handlewishlist = async() => {
+    let product={
+      image:img,
+       title,price
+      }
+  try {
+    const response = await axios.post(`https://636a17f3c07d8f936d92dd55.mockapi.io/fas`, product);
+    toast.success("Product added to wishlist")
+    return response.data
+  } catch (error) {
+      toast.error("please login first")
+    return error.message
+  }
   }
   return (
     <>
+       <Toaster/>
       {/* Main Body */}
       <Box marginTop={"15px"} >
         <Box height="auto" >
@@ -181,7 +194,18 @@ const Home = () => {
 
             <Box key={index} _hover={{ transform: "scale(0.95)", transition: "all .5s", cursor: "pointer" }}>
               <img onClick={() => navigate(`/details/${e._id}`)} src={e.image[0].src} alt="" />
-              <Button onClick={handlewishlist} marginLeft={"240px"} marginTop={"-280%"} _hover={{ bg: "black", color: "white", transform: "scale(1.2)", transition: "all .3s" }} borderRadius={"50%"} height="45px" padding={"14px"} border="none"><AiOutlineStar size={17} /></Button>
+              <Button onClick={async()=>{try {
+
+                await axios.post(`https://636a17f3c07d8f936d92dd55.mockapi.io/fas`,{
+                  title:e.title,
+                  price:e.price,
+                  category:e.category,
+                  image:e.image[0].src
+                })
+                toast.success("Product added to cart")
+              } catch (error) {
+                toast.error("Something Wrong")
+              } }} marginLeft={"240px"} marginTop={"-280%"} _hover={{ bg: "black", color: "white", transform: "scale(1.2)", transition: "all .3s" }} borderRadius={"50%"} height="45px" padding={"14px"} border="none"><AiOutlineStar size={17} /></Button>
 
               <Text color="#888181" textAlign={"left"} fontWeight={500} fontSize={10}>{e.category} </Text>
               <Text textAlign={"left"} marginTop={"-1px"} fontWeight={600} fontSize={14}>{e.title}</Text>

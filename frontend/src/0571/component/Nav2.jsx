@@ -40,16 +40,34 @@ import { BsFillPersonFill } from "react-icons/bs"
 import Logo from "../Img/logo2.png"
 import { useNavigate} from "react-router-dom";
 import Search from '../pages/Search';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 export default function WithSubnavigation() {
   const { isOpen, onToggle } = useDisclosure();
-
+const[wish,setwish]=useState([])
+const [update,setupdate]=useState(false)
   let navigate = useNavigate();
+  const getProducts = async () => {
+       
+    try {
+      const response = await axios.get("https://636a17f3c07d8f936d92dd55.mockapi.io/fas")
+      setwish(response.data)
+      setupdate(!update)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  useEffect(()=>{
+    getProducts()
+  },[update])
+const wishdata=wish.length
+  console.log(wishdata)
   return (
     <>
 
-      <Box 
-       display={{sm:"none" , md:"block"}}
+      {/* <Box 
+       display={{sm:"none" , md:"none",lg:"block"}}
       borderBottom="1px solid lightgray" width="100%" height="40%" paddingBottom={"4px"} paddingTop={"15px"}>
 
 
@@ -76,7 +94,7 @@ export default function WithSubnavigation() {
 
 
 
-      </Box>
+      </Box> */}
 
 
       <Box>
@@ -127,7 +145,7 @@ export default function WithSubnavigation() {
             <Box  marginRight={"-15px"}>   <Search/></Box>
          
            <Box paddingTop={"7px"} onClick={() => navigate("/login")}><BsFillPersonFill size={25} /></Box> 
-            <Box onClick={() => navigate("/wishlist")} display="flex" alignItems={"center"} _hover={{ cursor: "pointer" }}> <AiOutlineStar size={25} /><Text textAlign={"center"} background="#F16648" borderRadius={"50%"} marginTop={"-10px"} marginLeft={"-6px"} width="20px" height="20px" fontSize={14} color="white" fontWeight={600}>1</Text></Box>
+            <Box onClick={() => navigate("/wishlist")} display="flex" alignItems={"center"} _hover={{ cursor: "pointer" }}> <AiOutlineStar size={25} /><Text textAlign={"center"} background="#F16648" borderRadius={"50%"} marginTop={"-10px"} marginLeft={"-6px"} width="20px" height="20px" fontSize={14} color="white" fontWeight={600}>{wishdata}</Text></Box>
 
             <Box onClick={() => navigate("/cart")} _hover={{ cursor: "pointer" }} display="flex" alignItems={"center"}> <BiShoppingBag size={25} /><Text textAlign={"center"} background="#F16648" borderRadius={"52%"} marginTop={"-10px"} marginLeft={"-6px"} width="20px" height="20px" fontSize={14} color="white" fontWeight={600}>1</Text></Box>
 
