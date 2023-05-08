@@ -20,35 +20,40 @@ import { FiEye } from "react-icons/fi"
 import Footer from "../component/Footer"
 import axios from "axios";
 import { addProduct } from "../../0568/api/products.api";
+import { useSelector } from "react-redux";
 
-export default function ProductCard({ image, title, price }) {
+export default function ProductCard({data}) {
     const URL = "https://clothoapi.onrender.com/api";
     //  const image=props.image[0]
     // const title=props.title
     // const price=props.price
     //const [firstValue] = image;
-  
-    
-  
- 
+
+    const { token } = useSelector(state => state.authReducer)
+
+
     const addProduct = async () => {
-        const img=image && image[0].src 
-        let product={
-            image:img,
-             title,price
-            }
+     
+        
+
         try {
-          const response = await axios.post(`${URL}/cart/create`, product);
-          toast.success("Product added to cart")
-          return response
+            const response = await axios.post(`${URL}/cart/create`,data,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    }
+                }
+            );
+            toast.success("Product added to cart")
+            return response
         } catch (error) {
             toast.error("please login first")
-          return error.message
+            return error.message
         }
-      }
+    }
     return (
         <>
-          <Toaster/>
+            <Toaster />
             <Container maxW={"7xl"}>
                 <SimpleGrid
                     columns={{ base: 1, lg: 2 }}
@@ -58,7 +63,7 @@ export default function ProductCard({ image, title, price }) {
                         <Image
                             rounded={"md"}
                             alt={"product image"}
-                            src={image && image[0].src}
+                            src={data.image && data.image[0].src}
                             // src={'https://www.koovs.com/cdn/shop/files/KOOVS_20OCT22-2806.jpg?v=1682682944&width=360'}
                             fit={"cover"}
                             align={"center"}
@@ -74,13 +79,13 @@ export default function ProductCard({ image, title, price }) {
                                 fontWeight={600}
                                 mb={1}
                                 fontSize={{ base: "2xl", sm: "4xl", lg: "4xl" }}>
-                                {title}
+                                {data.title}
                             </Heading>
                             <Text
                                 color={useColorModeValue("gray.900", "gray.400")}
                                 fontWeight={600}
                                 fontSize={"2xl"}>
-                                {price}
+                                {data.price}
                             </Text>
                             <Box display="flex" gap="2px" mt="30px">
                                 <AiOutlineStar color="teal" />

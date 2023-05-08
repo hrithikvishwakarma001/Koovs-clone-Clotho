@@ -42,27 +42,30 @@ import { useNavigate} from "react-router-dom";
 import Search from '../pages/Search';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 export default function WithSubnavigation() {
   const { isOpen, onToggle } = useDisclosure();
 const[wish,setwish]=useState([])
 const [update,setupdate]=useState(false)
+const {cart}=useSelector(state=>state.ProductReducer)
+
   let navigate = useNavigate();
   const getProducts = async () => {
        
     try {
       const response = await axios.get("https://636a17f3c07d8f936d92dd55.mockapi.io/fas")
       setwish(response.data)
-      setupdate(!update)
+      
     } catch (error) {
       console.log(error)
     }
   }
   useEffect(()=>{
     getProducts()
-  },[update])
+  },[])
 const wishdata=wish.length
-  console.log(wishdata)
+
   return (
     <>
 
@@ -147,7 +150,7 @@ const wishdata=wish.length
            <Box paddingTop={"7px"} onClick={() => navigate("/login")}><BsFillPersonFill size={25} /></Box> 
             <Box onClick={() => navigate("/wishlist")} display="flex" alignItems={"center"} _hover={{ cursor: "pointer" }}> <AiOutlineStar size={25} /><Text textAlign={"center"} background="#F16648" borderRadius={"50%"} marginTop={"-10px"} marginLeft={"-6px"} width="20px" height="20px" fontSize={14} color="white" fontWeight={600}>{wishdata}</Text></Box>
 
-            <Box onClick={() => navigate("/cart")} _hover={{ cursor: "pointer" }} display="flex" alignItems={"center"}> <BiShoppingBag size={25} /><Text textAlign={"center"} background="#F16648" borderRadius={"52%"} marginTop={"-10px"} marginLeft={"-6px"} width="20px" height="20px" fontSize={14} color="white" fontWeight={600}>1</Text></Box>
+            <Box onClick={() => navigate("/cart")} _hover={{ cursor: "pointer" }} display="flex" alignItems={"center"}> <BiShoppingBag size={25} /><Text textAlign={"center"} background="#F16648" borderRadius={"52%"} marginTop={"-10px"} marginLeft={"-6px"} width="20px" height="20px" fontSize={14} color="white" fontWeight={600}>{cart.length}</Text></Box>
 
 
 

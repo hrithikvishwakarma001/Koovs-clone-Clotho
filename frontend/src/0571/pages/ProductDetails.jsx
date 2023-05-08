@@ -37,7 +37,7 @@ export default function ProductDetails() {
   }
   return (
     <div>
-      <SingleProductPageCardMaker  {...data} />
+      <SingleProductPageCardMaker  data={data} />
     </div>
   );
 }
