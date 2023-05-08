@@ -1,8 +1,7 @@
 import { SET_AUTH_TOKEN } from "./actionType";
 
 const initialState = {
-  isAuthenticated: false,
-  user: null,
+  isAuth: false,
   token: null,
 };
 
@@ -11,11 +10,10 @@ export const reducer = (state = initialState, action) => {
 
     case SET_AUTH_TOKEN:
       return {
-        ...state,
-        isAuthenticated: true,
-        user: action.payload.id,
-        token: action.payload.token,
-      };
+			...state,
+			isAuth: true,
+			token: action.payload,
+		};
     default:
       return state;
   }
