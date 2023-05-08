@@ -6,7 +6,7 @@ export const DeleteButton = ({ id, getData, deleteProduct }) => {
 		let res = await deleteProduct(id);
 		// console.log(res);
 		getData();
-		toast.success("User Deleted Successfully");
+		toast.success("Deleted Successfully");
 	};
 	return (
 		<Grid.Container
