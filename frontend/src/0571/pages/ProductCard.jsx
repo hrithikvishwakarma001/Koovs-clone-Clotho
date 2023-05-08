@@ -19,8 +19,12 @@ import { AiOutlineStar } from "react-icons/ai"
 import { FiEye } from "react-icons/fi"
 import Footer from "../component/Footer"
 
-export default function ProductCard(props) {
-
+export default function ProductCard({image,title,price}) {
+//  const image=props.image[0]
+// const title=props.title
+// const price=props.price
+//const [firstValue] = image;
+ console.log("ii",image)
 
     return (
         <>
@@ -33,7 +37,8 @@ export default function ProductCard(props) {
                     <Image
                         rounded={"md"}
                         alt={"product image"}
-                        src={"https://www.koovs.com/cdn/shop/products/KOOVS_20OCT22-0747-8.jpg?v=1668075236&width=600"}
+                        //src={image[0].src}
+                      // src={'https://www.koovs.com/cdn/shop/files/KOOVS_20OCT22-2806.jpg?v=1682682944&width=360'}
                         fit={"cover"}
                         align={"center"}
                         w={"100%"}
@@ -48,13 +53,13 @@ export default function ProductCard(props) {
                             fontWeight={600}
                             mb={1}
                             fontSize={{ base: "2xl", sm: "4xl", lg: "4xl" }}>
-                            Lorem ipsum dolor sit amet
+                            {title}
                         </Heading>
                         <Text
                             color={useColorModeValue("gray.900", "gray.400")}
                             fontWeight={600}
                             fontSize={"2xl"}>
-                            ₹999.00
+                           {price}
                         </Text>
                         <Box display="flex" gap="2px" mt="30px">
                             <AiOutlineStar color="teal" />
@@ -87,10 +92,35 @@ export default function ProductCard(props) {
                                 Fresh and Delecious Non-Veg is always available on Redmeat
                                 Lajawab Freshness
                             </Text>
-                            <Text fontSize={"md"}>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias obcaecati necessitatibus magni. Error, necessitatibus possimus molestiae ex aut dolore consequuntur labore mollitia voluptate! Perspiciatis dolore ut qui eum itaque fugiat corporis. Ullam, blanditiis mollitia id, suscipit sunt incidunt soluta veniam placeat unde vel accusantium esse a commodi temporibus, animi aliquam!lorem50
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati alias reiciendis odit! Qui atque perspiciatis obcaecati! Ea sequi fugit voluptate in, dicta illo. Dolorem voluptatum aliquam sit veritatis! Recusandae rem nesciunt officiis corporis natus omnis unde possimus, quas minus, enim doloribus ducimus nam numquam obcaecati nisi ad debitis in laboriosam!
-                            </Text>
+                           <Box w="100%" >
+                            <Text fontWeight={500} >Size :</Text>
+<Box mt="5px" display="flex" gap="10px"><Button bg="none" border="1px solid gray" _hover={{bg:"black" , color:"white"}}>S</Button>
+<Button bg="none" border="1px solid gray" _hover={{bg:"black" , color:"white"}}>M</Button>
+<Button bg="none" border="1px solid gray" _hover={{bg:"black" , color:"white"}}>L</Button>
+<Button bg="none" border="1px solid gray" _hover={{bg:"black" , color:"white"}}>XL</Button>
+
+
+
+
+
+</Box> 
+
+
+                           </Box>
+                           <Box w="100%" >
+                            <Text fontWeight={500} >Color :</Text>
+<Box mt="5px" display="flex" gap="10px"><Button borderRadius={"60%"} w="5%" bg="pink" border="1px solid gray" _hover={{transform: "scale(1.2)", transition: "all .3s", color:"white"}}></Button>
+<Button borderRadius={"60%"} w="5%" bg="white" border="1px solid gray" _hover={{ transform: "scale(1.2)", transition: "all .3s", color:"white"}}></Button>
+
+
+
+
+
+
+</Box> 
+
+
+                           </Box>
                         </VStack>
                     </Stack>
 

@@ -15,7 +15,8 @@ import {
   useBreakpointValue,
   useDisclosure,
   SimpleGrid,
-  Center
+  Center,
+  UnorderedList,
 } from '@chakra-ui/react';
 import { FaFacebookF } from 'react-icons/fa';
 import { AiOutlineInstagram } from "react-icons/ai";
@@ -25,12 +26,20 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
 } from '@chakra-ui/icons';
+import {
+  List,
+  ListItem,
+  ListIcon,
+
+ 
+} from '@chakra-ui/react'
 import { BiChevronDown, BiSearch, BiShoppingBag } from "react-icons/bi"
 import { useMediaQuery } from '@chakra-ui/react'
 import { AiOutlineStar } from "react-icons/ai"
 import { BsFillPersonFill } from "react-icons/bs"
-import Logo from "../Img/logo.png"
+import Logo from "../Img/logo2.png"
 import { useNavigate} from "react-router-dom";
+import Search from '../pages/Search';
 
 export default function WithSubnavigation() {
   const { isOpen, onToggle } = useDisclosure();
@@ -39,7 +48,7 @@ export default function WithSubnavigation() {
   return (
     <>
 
-      <Box
+      <Box 
        display={{sm:"none" , md:"block"}}
       borderBottom="1px solid gray" width="100%" height="40%" paddingBottom={"4px"} paddingTop={"15px"}>
 
@@ -73,6 +82,7 @@ export default function WithSubnavigation() {
       <Box>
 
         <Flex
+       
           bg={useColorModeValue('white', 'gray.800')}
           color={useColorModeValue('gray.600', 'white')}
           minH={'60px'}
@@ -104,16 +114,19 @@ export default function WithSubnavigation() {
               <DesktopNav />
             </Flex>
           </Flex>
-
+    <img onClick={()=>navigate("/")} style={{width:"10%", marginRight:"28%" }} src={Logo} alt="" />
           <Stack
+
             flex={{ base: 1, md: 0 }}
             justify={'flex-end'}
             direction={'row'}
             marginRight={39.5}
             spacing={4}>
 
-            <BiSearch size={25} />
-           <Box onClick={() => navigate("/login")}><BsFillPersonFill size={25} /></Box> 
+            {/* <BiSearch size={25} /> */}
+            <Box  marginRight={"-15px"}>   <Search/></Box>
+         
+           <Box paddingTop={"7px"} onClick={() => navigate("/login")}><BsFillPersonFill size={25} /></Box> 
             <Box onClick={() => navigate("/wishlist")} display="flex" alignItems={"center"} _hover={{ cursor: "pointer" }}> <AiOutlineStar size={25} /><Text textAlign={"center"} background="#F16648" borderRadius={"50%"} marginTop={"-10px"} marginLeft={"-6px"} width="20px" height="20px" fontSize={14} color="white" fontWeight={600}>1</Text></Box>
 
             <Box onClick={() => navigate("/cart")} _hover={{ cursor: "pointer" }} display="flex" alignItems={"center"}> <BiShoppingBag size={25} /><Text textAlign={"center"} background="#F16648" borderRadius={"52%"} marginTop={"-10px"} marginLeft={"-6px"} width="20px" height="20px" fontSize={14} color="white" fontWeight={600}>1</Text></Box>
@@ -138,13 +151,14 @@ const DesktopNav = () => {
   const popoverContentBgColor = useColorModeValue('white', 'gray.800');
 
   return (
-    <Stack direction={'row'} ml="-20px" spacing={2}>
+    <Stack direction={'row'} ml="-20px" spacing={2} >
 
-      {NAV_ITEMS.map((navItem) => (
-        <Box key={navItem.label}>
+      {NAV_ITEMS.map((navItem,i) => (
+        <Box key={i}>
           <Popover trigger={'hover'} placement={'bottom-start'}>
             <PopoverTrigger>
-              <Link
+              <Link 
+               
                 p={2}
                 href={navItem.href ?? '#'}
                 fontSize={'sm'}
@@ -167,8 +181,8 @@ const DesktopNav = () => {
                 rounded={'xl'}
                 width={'150%'}>
                 <Box w="100%" display="flex" justifyContent={"space-between"}>
-                  {navItem.children.map((child) => (
-                    <DesktopSubNav key={child.label} {...child} />
+                  {navItem.children.map((child,i) => (
+                    <DesktopSubNav key={i} {...child} />
                   ))}
                 </Box>
               </PopoverContent>
@@ -203,8 +217,8 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
           fontWeight={500}>
           {label}
         </Text>
-        <Text fontSize={'sm'} fontWeight={500}>{subLabel.map((e) =>
-          <Box mt="20px"> <ul >{e.sub}</ul> </Box>
+        <Text fontSize={'sm'} fontWeight={500}>{subLabel.map((e,i) =>
+          <Box key={i} mt="20px"> <ul>{e.sub}</ ul> </Box>
 
         )}</Text>
       </Box>
@@ -223,8 +237,8 @@ const MobileNav = () => {
       bg={useColorModeValue('white', 'gray.800')}
       p={4}
       display={{ md: 'none' }}>
-      {NAV_ITEMS.map((navItem) => (
-        <MobileNavItem key={navItem.label} {...navItem} />
+      {NAV_ITEMS.map((navItem,index) => (
+        <MobileNavItem key={index} {...navItem} />
       ))}
 
     </Stack>
@@ -270,8 +284,8 @@ const MobileNavItem = ({ label, children, href }) => {
           borderColor={useColorModeValue('gray.200', 'gray.700')}
           align={'start'}>
           {children &&
-            children.map((child) => (
-              <Link key={child.label} py={2} href={child.href}>
+            children.map((child,index) => (
+              <Link key={index} py={2} href={child.href}>
                 {child.label}
               </Link>
             ))}
@@ -300,7 +314,7 @@ const NAV_ITEMS = [
           { sub: "Co-ord sets" }
         ],
 
-        href: '#',
+        href: '/mens',
       }
       , {
         label: 'Brands',
@@ -336,9 +350,10 @@ const NAV_ITEMS = [
           { sub: "Pins" }
 
         ],
-        href: '#',
+        href: '/mens',
       }
     ],
+    href: '/mens',
   },
   {
     label: 'Womens',
@@ -356,7 +371,7 @@ const NAV_ITEMS = [
           { sub: "Co-ord sets" }
         ],
 
-        href: '#',
+        href: '/womens',
       }
       , {
         label: 'Brands',
@@ -372,7 +387,7 @@ const NAV_ITEMS = [
 
 
         ],
-        href: '#',
+        href: '/womens',
       },
       {
         label: 'Footwear',
@@ -395,6 +410,7 @@ const NAV_ITEMS = [
         href: '#',
       }
     ],
+    href: '/womens',
   },
   {
     label: 'Learn Design',

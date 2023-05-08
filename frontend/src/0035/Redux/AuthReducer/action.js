@@ -14,6 +14,7 @@ export const getLogin = (userData) => async (dispatch) => {
 	}
 };
 
+
 export const getRegister = async (userData) => {
 	try {
 		await axios.post(`${BASEURL}/users/register`, userData);
@@ -21,3 +22,4 @@ export const getRegister = async (userData) => {
 		console.log(err);
 	}
 };
+
