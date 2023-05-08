@@ -49,18 +49,36 @@
 > Endpoints for backend
 
 ### users
--  `GET /api/users` to get all users
--  `GET /api/users/:id` to get a user by id
--  `POST /api/users/register` to create a new user
--  `POST /api/users/login` to login a user and get token
--  `PATCH /api/users/update/:id` to update a user by id
--  `DELETE /api/users/delete/:id` to delete a user by id
+
+-   `GET /api/users` to get all users
+-   `GET /api/users/:id` to get a user by id
+-   `POST /api/users/register` to create a new user
+-   `POST /api/users/login` to login a user and get token
+-   `PATCH /api/users/update/:id` to update a user by id
+-   `DELETE /api/users/delete/:id` to delete a user by id
 
 ### products
--  `GET /api/products/all` to get all products
--  `GET /api/products/men` to get all mens products
--  `GET /api/products/women` to get all womens products
--  `GET /api/products/all/:id` to get a product by id
--  `POST /api/products/all/create` to create a new product
--  `PATCH /api/products/all/update/:id` to update a product by id
--  `DELETE /api/products/all/delete/:id` to delete a product by id
+
+-   `GET /api/products/all` to get all products
+-   `GET /api/products/men` to get all mens products
+-   `GET /api/products/women` to get all womens products
+-   `GET /api/products/all/:id` to get a product by id
+-   `POST /api/products/all/create` to create a new product
+-   `PATCH /api/products/all/update/:id` to update a product by id
+-   `DELETE /api/products/all/delete/:id` to delete a product by id
+
+### orders
+
+-   `Auth required` for all orders routes
+-   `GET /api/orders` to get all orders
+-   `POST /api/orders/create` to create a new order
+
+### cart
+
+-   `Auth required` for all cart routes
+-   `GET /api/cart` to get all cart items of user
+-   `GET /api/cart/admin` to get all cart items of all user
+-   `GET /api/cart/:id` to get a cart item by id
+-   `POST /api/cart/create` to create a new cart item
+-   `PATCH /api/cart/update/:id` to update a cart item by id
+-   `DELETE /api/cart/delete/:id` to delete a cart item by id
