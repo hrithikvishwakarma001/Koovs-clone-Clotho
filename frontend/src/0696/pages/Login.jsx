@@ -13,40 +13,38 @@ import {
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { auth } from "../api/auth";
-import { getAuth } from "../../0035/Redux/AuthReducer/action";
-import { useSelector,useDispatch } from "react-redux";
+
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isAuth, setIsAuth] = useState(false);
   const [Token, setToken] = useState("");
   const [IsUserKnowPassword, setIsUserKnowPassword] = useState(true);
-  const authState = useSelector((state) => state.loginReducer);
-  const dispatch = useDispatch();
   const toast = useToast();
 
   const HandleLogin = async () => {
     console.log(email, password);
-    dispatch(getAuth(email, password));
-
-    if (authState.token) { // use the token from Redux state
-      setIsAuth(true);
-      setEmail("");
-      setPassword("");
-      toast({
-        title: "Login Successful",
-        status: "success",
-        duration: 3000,
-        isClosable: true,
-      });
-    } else {
-      toast({
-        title: "Login Failed",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
-    }
+    // let res = await auth(email, password);
+    // console.log(res);
+    // if (res.token) {
+    //   setToken(res.token);
+    //   setIsAuth(true);
+    //   setEmail("");
+    //   setPassword("");
+    //   toast({
+    //     title: "Login Successful",
+    //     status: "success",
+    //     duration: 3000,
+    //     isClosable: true,
+    //   });
+    // }else{
+    //   toast({
+    //     title: "Login Failed",
+    //     status: "error",
+    //     duration: 3000,
+    //     isClosable: true,
+    //   });
+    // }
   };
 
   return (
