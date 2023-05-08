@@ -5,6 +5,8 @@ import { IconButton } from "./Table/IconButton";
 import { EditIcon } from "./Table/EditIcon";
 import { updateUser } from "../api/users.api";
 import GenderSelect from "../utils/GenderSelect";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function UserEdit({ user, getUsers }) {
 	const [visible, setVisible] = React.useState(false);
@@ -22,6 +24,7 @@ export default function UserEdit({ user, getUsers }) {
 		const update = await updateUser(data._id, data);
 		getUsers();
     console.log(update);
+		toast.success("User Updated Successfully");
 	};
 
 	const handleChange = (e) => {
@@ -34,6 +37,7 @@ export default function UserEdit({ user, getUsers }) {
 			<IconButton onClick={handler}>
 				<EditIcon size={20} fill='#979797' />
 			</IconButton>
+			<ToastContainer />
 			<Modal
 				blur
 				closeButton

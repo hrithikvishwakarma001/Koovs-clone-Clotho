@@ -3,13 +3,19 @@ import { Card, Grid, Row, Text } from "@nextui-org/react";
 export default function UserCard({ data }) {
 	console.log("👻 -> file: UserCard.jsx:4 -> UserCard -> data:", data);
 
-	const images = [
-		"https://png.pngtree.com/png-clipart/20210713/ourmid/pngtree-japanese-social-media-male-user-avatar-png-image_3584406.jpg",
-		"https://png.pngtree.com/png-clipart/20210713/ourmid/pngtree-social-media-male-college-student-user-avatar-png-image_3584401.jpg",
-		"https://png.pngtree.com/png-clipart/20210713/ourmid/pngtree-japanese-social-media-boy-wearing-a-hat-user-avatar-png-image_3584403.jpg",
-		"https://png.pngtree.com/png-clipart/20210713/ourmid/pngtree-japanese-style-male-user-avatar-png-image_3584395.jpg",
-		"https://png.pngtree.com/png-clipart/20210718/original/pngtree-japanese-sports-male-social-media-avatar-png-image_6531262.jpg",
-	];
+const images = [
+	"https://cdn.dribbble.com/userupload/3990383/file/original-94bad88747d2c5db8c5bbdafb1144a9a.jpg?compress=1&resize=1200x900",
+	"https://cdn.dribbble.com/userupload/3990398/file/original-8baa59393c2bcc65d26c02dbcadd8b94.jpg?compress=1&resize=1200x900",
+	"https://cdn.dribbble.com/userupload/3990402/file/original-7fe8e2df6819426b20d5316b361fdde3.jpg?compress=1&resize=1200x900",
+	"https://cdn.dribbble.com/userupload/3990394/file/original-3977affb1fece5685f3a953d5e088662.jpg?compress=1&resize=1200x900",
+	"https://cdn.dribbble.com/userupload/3990371/file/original-a710993a582d6bc7de5b9ca57ac5b3e5.jpg?compress=1&resize=1200x900",
+	"https://cdn.dribbble.com/userupload/3990379/file/original-36044971ae30c0aff1254814d23d5ace.jpg?compress=1&resize=1200x900",
+	"https://cdn.dribbble.com/userupload/3990390/file/original-91871ff78db195092569d2cfa9fa2ee0.jpg?compress=1&resize=1200x900",
+	"https://cdn.dribbble.com/userupload/3990325/file/original-145e76393754b84d567d7f7fe1ff2a26.jpg?compress=1&resize=1200x900",
+	"https://cdn.dribbble.com/userupload/3758738/file/original-fae32cd8a08eeb98142435e94fa56fa8.jpg?compress=1&resize=1200x900",
+	"https://cdn.dribbble.com/users/230875/screenshots/12589592/media/a12435c0fd22de967b379b098f606683.jpg?compress=1&resize=1200x900",
+	"https://cdn.dribbble.com/users/230875/screenshots/14109430/media/79355b938c72936745827c87688bdc53.jpg?compress=1&resize=1200x900",
+];
 	return (
 		<Grid.Container gap={2} justify='flex-start'>
 			{data !== "Something went wrong! Please try again later." ? (

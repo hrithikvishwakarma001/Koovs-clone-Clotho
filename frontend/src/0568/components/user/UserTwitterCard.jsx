@@ -1,7 +1,7 @@
 import React from "react";
 import { User, Row, Col, Text, Button, Spacer, Grid } from "@nextui-org/react";
 
-export const UserTwitterCard = () => {
+export const UserTwitterCard = ({image}) => {
 	const [following, setFollowing] = React.useState(false);
 
 	return (
@@ -15,7 +15,7 @@ export const UserTwitterCard = () => {
 			<Row justify='space-around' align='center'>
 				<Col span={8}>
 					<User
-						src='https://i.pravatar.cc/150'
+						src={image}
 						name='Hrithik'
 						description='@hrithikv05'
 						css={{ px: 0 }}

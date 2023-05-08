@@ -18,9 +18,9 @@ export default function Cards() {
 
 		try {
 			// let data = await ...
-			console.log(query);
+			// console.log(query);
 			const res = await searchByQuery(query);
-			console.log("👻 -> file: Card.jsx:22 -> handleClick -> res:", res);
+			// console.log("👻 -> file: Card.jsx:22 -> handleClick -> res:", res);
 			setResponse(res);
 			setTotal(res.length);
 		} catch (error) {
@@ -36,7 +36,7 @@ export default function Cards() {
 					value={query}
 					underlined
 					labelLeft='Query'
-					placeholder='e.g. id : name : email'
+					placeholder='e.g. name or email'
 					css={{ mb: "20px", w: "100%", p: "10px" }}
 					contentRight={
 						<div

@@ -16,7 +16,6 @@ export default function ShowPreview({ product }) {
 			</IconButton>
 
 			<Modal
-				blur
 				closeButton
 				open={visible}
 				onClose={closeHandler}
