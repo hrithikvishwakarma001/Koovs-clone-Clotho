@@ -22,7 +22,7 @@ const priceNumber = parseFloat(price.replace(/[^\d.-]/g, "").replace(",", "").su
 };
 
 const DIV=styled.div`
-  border:1px solid grey;
+  
   padding:10px;
   width:270px;
 

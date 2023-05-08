@@ -7,18 +7,19 @@ import { useLocation, useSearchParams } from "react-router-dom";
 import { Paginate } from "../component/Paginate";
 import { Sidebar } from "./Sidebar";
 
+
 export const Productlist = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
   const location = useLocation();
-
   const { products } = useSelector((store) => store.ProductReducer);
-
-  const totalCount = 75;
+  const totalCount = 90;
   const [currentPage, setCurrentPage] = useState(
-    parseInt(searchParams.get("page")) || 1
+    parseInt(searchParams.get("page"))
   );
   const totalPages = Math.ceil(totalCount / 10);
+
+  const [columns, setColumns] = useState(5);
 
   let obj = {
     params: {
@@ -35,83 +36,76 @@ export const Productlist = () => {
   }, [location.search, currentPage]);
 
   const handlePageChange = (pageNumber) => {
-    setSearchParams({ page: pageNumber });
+    setSearchParams({
+      page: pageNumber,
+      category: searchParams.getAll("category"),
+      order: searchParams.get("order"),
+    });
     setCurrentPage(pageNumber);
+  };
+
+  const handleColumnsChange = (numColumns) => {
+    setColumns(numColumns);
   };
 
   return (
     <>
-    <Sidebar />
-      <ProductList>
+      <Sidebar />
+      <ButtonContainer>
+        <Button onClick={() => handleColumnsChange(5)}>|||||</Button>
+        <Button onClick={() => handleColumnsChange(4)}>||||</Button>
+        <Button onClick={() => handleColumnsChange(3)}>|||</Button>
+        <Button onClick={() => handleColumnsChange(2)}>||</Button>
+      </ButtonContainer>
+      <ProductList columns={columns}>
         {products.length > 0 &&
           products.map((el) => {
             return <Productcard key={el.articleCode} {...el} />;
           })}
       </ProductList>
 
-      <Pagination>
-        <Paginate
-          totalPages={totalPages}
-          currentPage={currentPage}
-          onPageChange={handlePageChange}
-        />
-      </Pagination>
+      <Paginate
+        totalPages={totalPages}
+        currentPage={currentPage}
+        onPageChange={handlePageChange}
+      />
     </>
   );
 };
 
 const ProductList = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  grid-gap: 30px;
+  grid-template-columns: repeat(${(props) => props.columns}, minmax(250px, 1fr));
+  grid-gap: 25px;
   padding: 40px;
   background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  
+ 
 
   @media (max-width: 768px) {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     padding: 20px;
     grid-gap: 20px;
+    margin: 0 20px;
   }
 `;
 
-const Pagination = styled.div`
+
+const ButtonContainer = styled.div`
   display: flex;
-  justify-content: center;
-  margin-top: 40px;
+  justify-content: flex-end;
+  margin-right:40px
+`;
 
-  & ul {
-    display: inline-flex;
-    padding: 0;
-    margin: 0;
-  }
 
-  & ul li {
-    list-style: none;
-    margin: 0 5px;
-  }
-
-  & ul li a {
-    display: inline-block;
-    padding: 10px 20px;
-    color: #fff;
-    background-color: #007bff;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-
-    &:hover {
-      background-color: #0056b3;
-    }
-  }
-
-  & ul li.active a {
-    background-color: #0056b3;
-  }
-
-  & ul li.disabled a {
-    color: #6c757d;
-    background-color: #fff;
-    cursor: not-allowed;
+const Button = styled.button`
+  margin: 0 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+  &:hover {
+    background-color: #ccc;
   }
 `;
