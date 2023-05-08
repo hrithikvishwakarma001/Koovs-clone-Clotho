@@ -3,7 +3,8 @@ import { Modal, Button, Text, Input } from "@nextui-org/react";
 import { EditIcon } from "../Table/EditIcon";
 import { IconButton } from "../Table/IconButton";
 import { updateProduct } from "../../api/products.api";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export default function EditModal({ product, getData }) {
 	const [visible, setVisible] = React.useState(false);
 	const [data, setData] = React.useState(product);
@@ -20,6 +21,7 @@ export default function EditModal({ product, getData }) {
 		const update = await updateProduct(product._id, data);
 		getData();
 		// console.log(update);
+		toast.success("Product Updated Successfully");
 	};
 
 	const handleChange = (e) => {
