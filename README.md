@@ -28,7 +28,7 @@
 > ### cammands
 
 -   `npm install` to install all dependencies
--   `npm start` to start the server
+-   `npm run server` to start the server
 -   `npm run dev` to start the app in development mode
 
 > ### git commands
@@ -57,8 +57,10 @@
 -  `DELETE /api/users/delete/:id` to delete a user by id
 
 ### products
--  `GET /api/products` to get all products
--  `GET /api/products/:id` to get a product by id
--  `POST /api/products/create` to create a new product
--  `PATCH /api/products/update/:id` to update a product by id
--  `DELETE /api/products/delete/:id` to delete a product by id
+-  `GET /api/products/all` to get all products
+-  `GET /api/products/men` to get all mens products
+-  `GET /api/products/women` to get all womens products
+-  `GET /api/products/all/:id` to get a product by id
+-  `POST /api/products/all/create` to create a new product
+-  `PATCH /api/products/all/update/:id` to update a product by id
+-  `DELETE /api/products/all/delete/:id` to delete a product by id

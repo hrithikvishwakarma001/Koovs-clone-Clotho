@@ -1,15 +1,19 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { Box, Text, Image, Button, background, Center, Heading, SimpleGrid } from "@chakra-ui/react"
-
+import { useDispatch, useSelector } from "react-redux";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-
+import { Link } from 'react-router-dom';
 import { FiArrowRight } from "react-icons/fi"
 import Footer from '../component/Footer';
 import Banner from '../component/Slider';
+import { getProduct } from '../../0035/Redux/ProductReducer/action';
+import { getProducts } from '../../0568/api/products.api';
 const Home = () => {
   const [data, setdata] = useState(true)
+
+
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -74,7 +78,29 @@ const Home = () => {
 
 
   ]
+ const dispatch=useDispatch()
+ const Data=useSelector(state=>state.ProductReducer.products)
+ //console.log("hhh",Data)
+ 
+ const newdata=Data.splice(4,8)
+const crousaldata=Data.slice(11,21)
+const newarrivalsdata=Data.slice(31,39)
+const mensdata=Data.slice(55,59)
 
+const getdata= async()=>{
+ try {
+  let res=await getProducts()
+  console.log(res.products)
+ } catch (error) {
+  console.log(error)
+ }
+}
+ 
+useEffect(()=>{
+  getdata()
+},[])
+
+console.log(Data);
 
   return (
     <>
@@ -89,7 +115,7 @@ const Home = () => {
         <SimpleGrid margin="auto" columns={{ sm: 1, md: 2, lg: 4 }} gap="40px">
 
           {womendata.map((e) => <Box _hover={{ transform: "scale(0.95)", transition: "all .5s", cursor: "pointer" }}>
-            <img style={{ width: "100%", height: "400px" }} src={e.img} />
+            <img style={{ width: "100%" }} src={e.img} />
             <Box display="flex" justifyContent={"space-between"} marginTop={"-60px"} paddingLeft={"15px"}>
               <Box >
                 <Text fontWeight={600} fontSize={16}>T-Shirts</Text>
@@ -108,12 +134,12 @@ const Home = () => {
         <Box height="auto" padding="20px" paddingTop={"0px"} >
         <SimpleGrid margin="auto" columns={{ sm: 1, md: 2, lg: 4 }} gap="40px">
 
-          {womendata.map((e) => <Box _hover={{ transform: "scale(0.95)", transition: "all .5s", cursor: "pointer" }} >
-            <img style={{ width: "100%", height: "400px" }} src={e.img} />
+          {mensdata.map((e) => <Box _hover={{ transform: "scale(0.95)", transition: "all .5s", cursor: "pointer" }} >
+            <img style={{ width: "100%" }} src={e.image[0].src} />
 
             <Box display="flex" justifyContent={"space-between"} marginTop={"-60px"} paddingLeft={"15px"}>
               <Box >
-                <Text fontWeight={600} fontSize={16}>T-Shirts</Text>
+                <Text fontWeight={600} fontSize={16}>Koovs</Text>
                 <Text marginTop="-5px" fontSize={14} fontWeight={500} color={"#9D9696"}>10 items</Text>
               </Box>
               <Box paddingRight={"10px"} >
@@ -134,12 +160,17 @@ const Home = () => {
       >
         <SimpleGrid margin="auto" columns={{ sm: 1, md: 2, lg: 4 }} >
 
-          {arrival.map((e) => <Box _hover={{ transform: "scale(0.95)", transition: "all .5s", cursor: "pointer" }}>
-            <img style={{ height: "400px" }} src={e.img} alt="" />
-            <Text color="#888181" textAlign={"left"} fontWeight={500} fontSize={10}>{e.cat} </Text>
+          {newdata.map((e) =>
+          <Link to={`/details/${e.articleCode
+          }`}>
+          <Box _hover={{ transform: "scale(0.95)", transition: "all .5s", cursor: "pointer" }}>
+            <img  src={e.image[0].src} alt="" />
+            <Text color="#888181" textAlign={"left"} fontWeight={500} fontSize={10}>{e.category} </Text>
             <Text textAlign={"left"} marginTop={"-1px"} fontWeight={600} fontSize={14}>{e.title}</Text>
-            <Text textAlign={"left"} marginTop={"-1px"} fontWeight={400} fontSize={13}>hii{e.price}</Text>
-          </Box>)}
+            <Text textAlign={"left"} marginTop={"-1px"} fontWeight={400} fontSize={13}>{e.price}</Text>
+          </Box>
+          </Link>
+          )}
 
 
         </SimpleGrid>
@@ -174,10 +205,10 @@ const Home = () => {
 
         <Carousel responsive={responsive}>
 
-          {arrival.map((e) =>
+          {crousaldata.map((e) =>
             <Box marginTop={"30px"} width="80%" margin="auto" _hover={{ transform: "scale(1.2)", transition: "all .5s", cursor: "pointer" }}  >
               <Box w="100%" h="auto" padding="5px"
-              >  <Image w="100%" h="100%" ml="5px" src={e.img} />
+              >  <Image w="100%" h="100%" ml="5px" src={e.image[0].src} />
               </Box>
 
               <Box h="100px" padding="10px">
@@ -266,13 +297,13 @@ const Home = () => {
 
 
 >
-  <SimpleGrid margin="auto" columns={{ sm: 1, md: 2, lg: 4 }} >
+  <SimpleGrid margin="auto"  columns={{ sm: 1, md: 2, lg: 4 }} >
 
-    {arrival.map((e) => <Box _hover={{ transform: "scale(0.95)", transition: "all .5s", cursor: "pointer" }}>
-      <img style={{ height: "400px" }} src={e.img} alt="" />
-      <Text color="#888181" textAlign={"left"} fontWeight={500} fontSize={10}>{e.cat} </Text>
+    {newarrivalsdata.map((e) => <Box _hover={{ transform: "scale(0.95)", transition: "all .5s", cursor: "pointer" }}>
+      <img style={{ height: "400px" }} src={e.image[0].src} alt="" />
+      <Text color="#888181" textAlign={"left"} fontWeight={500} fontSize={10}>{e.category} </Text>
       <Text textAlign={"left"} marginTop={"-1px"} fontWeight={600} fontSize={14}>{e.title}</Text>
-      <Text textAlign={"left"} marginTop={"-1px"} fontWeight={400} fontSize={13}>hii{e.price}</Text>
+      <Text textAlign={"left"} marginTop={"-1px"} fontWeight={400} fontSize={13}>{e.price}</Text>
     </Box>)}
 
 
