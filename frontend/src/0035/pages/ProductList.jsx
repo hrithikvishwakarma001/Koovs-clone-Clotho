@@ -5,6 +5,7 @@ import { Productcard } from "./ProductCard";
 import styled from "styled-components";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { Paginate } from "../component/Paginate";
+import { Sidebar } from "./Sidebar";
 
 export const Productlist = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -40,6 +41,7 @@ export const Productlist = () => {
 
   return (
     <>
+    <Sidebar />
       <ProductList>
         {products.length > 0 &&
           products.map((el) => {
