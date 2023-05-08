@@ -3,7 +3,8 @@ import { Get_Product_Success, Patch_product_success, Product_Failure, Product_Re
 const initialState = {
     isLoading: false,
     isError: false,
-    products: []
+    products: [],
+    total:0
 }
 
 
@@ -18,7 +19,7 @@ export const reducer = (state = initialState, { type, payload }) => {
             return { ...state, isLoading: false, isError: true }
         }
         case Get_Product_Success: {
-            return { ...state, isLoading: false, products: payload }
+            return { ...state, isLoading: false, products: payload,total:payload.length }
         }
         case Patch_product_success: {
             return { ...state, isLoading: false, }

@@ -1,65 +1,92 @@
-import { useEffect, useState } from "react"
-import {  useSearchParams } from "react-router-dom"
+import { useEffect, useState } from "react";
+import { useSearchParams, } from "react-router-dom";
+import {Paginate} from "../component/Paginate"
 
-const Sidebar=()=>{
-    const [searchParams,setSearchParams]=useSearchParams()
-    const initialCategory=searchParams.getAll("category")
-    const initialOrder=searchParams.get("order")
-    
-    const [category,setCategory]=useState(initialCategory||[])
-    const [order,setOrder]=useState(initialOrder||"")
-    
-    
-    const handleChange=(e)=>{
-        let newCategory=[...category]
-        const value=e.target.value
-        if(newCategory.includes(value)){
-            newCategory=newCategory.filter((el)=>el!==value)
-        }else{
-            newCategory.push(value)
-        }
+export const Sidebar = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initialColor = searchParams.getAll("color");
+  const initialOrder = searchParams.get("order");
+  const initialPage = searchParams.get("page");
 
-setCategory(newCategory)
-console.log(category)
+  const [color, setColor] = useState(initialColor || []);
+  const [order, setOrder] = useState(initialOrder || "");
+  const [page, setPage] = useState(+initialPage || 1);
+
+  const handleChange = (e) => {
+    let newColor = [...color];
+    const value = e.target.value;
+    if (newColor.includes(value)) {
+      newColor = newColor.filter((el) => el !== value);
+    } else {
+      newColor.push(value);
     }
-    const handleSort=(e)=>{
-        setOrder(e.target.value)
-        console.log(e.target.value)
-    }
-    useEffect(()=>{
-let params={
-    category,
-    
-}
-order&&(params.order=order)
-setSearchParams(params)
-    },[category, order])
-    return <>
-    <h1>filter by</h1>
 
-    <div>
-        <input type="checkbox" value={"male"}  onChange={handleChange} checked={category.includes("male")} ></input>
-        <label>Men</label>
+    setColor(newColor);
+  };
 
-    </div>
-    <div>
-        <input type="checkbox" value={"female"}  onChange={handleChange} checked={category.includes("female")} ></input>
-        <label>women</label>
+  const handleSort = (e) => {
+    setOrder(e.target.value);
+  };
 
-    </div>
-    <div>
-        <input type="checkbox" value={"kids"}  onChange={handleChange} checked={category.includes("kids")}></input>
-        <label>kids</label>
+  const handlePageChange = (newPage) => {
+    setPage(newPage);
+  };
 
-    </div>
-    <div onChange={handleSort}>
-        <input type="radio" name="order" value={"asc"} ></input>
-        <label>assending</label>
-        <input type="radio" name="order" value={"desc"} ></input>
-        <label>dessending</label>
+  useEffect(() => {
+    let params = {
+      color,
+      page,
+    };
+    order && (params.order = order);
+    setSearchParams(params);
+  }, [color, order, page]);
 
+  const totalPages = 7;
+
+  return (
+    <>
+      <h1>Filter by</h1>
+
+      <div>
+        <input
+          type="checkbox"
+          value={"red"}
+          onChange={handleChange}
+          checked={color.includes("red")}
+        />
+        <label>Red</label>
       </div>
-    
+
+      <div>
+        <input
+          type="checkbox"
+          value={"blue"}
+          onChange={handleChange}
+          checked={color.includes("blue")}
+        />
+        <label>Blue</label>
+      </div>
+
+      <div>
+        <input
+          type="checkbox"
+          value={"green"}
+          onChange={handleChange}
+          checked={color.includes("green")}
+        />
+        <label>Green</label>
+      </div>
+
+      <div>
+        <label>Sort by:</label>
+        <select onChange={handleSort} value={order}>
+          <option value="">None</option>
+          <option value="asc">Ascending</option>
+          <option value="desc">Descending</option>
+        </select>
+      </div>
+
+     
     </>
-}
-export default Sidebar
+  );
+};
