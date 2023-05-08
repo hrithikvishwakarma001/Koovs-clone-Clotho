@@ -21,71 +21,71 @@ export const CartItem = (props) => {
   const {
     isGiftWrapping,
     name,
-    description,
-    quantity,
-    imageUrl,
+    _id,
+    title,
+    image,
     currency,
     price,
     onChangeQuantity,
     onClickDelete,
   } = props
   return (
-    <Flex
-      direction={{
-        base: 'column',
-        md: 'row',
-      }}
-      justify="space-between"
-      align="center"
-    >
-      <CartProductMeta
-        name={name}
-        description={description}
-        image={imageUrl}
-        isGiftWrapping={isGiftWrapping}
-      />
+		<Flex
+			direction={{
+				base: "column",
+				md: "row",
+			}}
+			justify='space-between'
+			align='center'>
+			<CartProductMeta
+				name={title}
+				description={_id}
+				image={image[0].src}
+				isGiftWrapping={isGiftWrapping}
+			/>
 
-      {/* Desktop */}
-      <Flex
-        width="full"
-        justify="space-between"
-        display={{
-          base: 'none',
-          md: 'flex',
-        }}
-      >
-        <QuantitySelect
-          value={quantity}
-          onChange={(e) => {
-            onChangeQuantity?.(+e.currentTarget.value)
-          }}
-        />
-        <PriceTag price={price} currency={currency} />
-        <CloseButton aria-label={`Delete ${name} from cart`} onClick={onClickDelete} />
-      </Flex>
+			{/* Desktop */}
+			<Flex
+				width='full'
+				justify='space-between'
+				display={{
+					base: "none",
+					md: "flex",
+				}}>
+				<QuantitySelect
+					value={1}
+					onChange={(e) => {
+						onChangeQuantity?.(+e.currentTarget.value);
+					}}
+				/>
+				<PriceTag price={price} currency={currency} />
+				<CloseButton
+					aria-label={`Delete ${title} from cart`}
+					onClick={onClickDelete}
+				/>
+			</Flex>
 
-      {/* Mobile */}
-      <Flex
-        mt="4"
-        align="center"
-        width="full"
-        justify="space-between"
-        display={{
-          base: 'flex',
-          md: 'none',
-        }}
-      >
-        <Link fontSize="sm" textDecor="underline">
-          Delete
-        </Link>
-        <QuantitySelect
-          value={quantity}
-          onChange={(e) => {
-            onChangeQuantity?.(+e.currentTarget.value)
-          }}
-        />
-        <PriceTag price={price} currency={currency} />
-      </Flex>
-    </Flex>
-  )
+			{/* Mobile */}
+			<Flex
+				mt='4'
+				align='center'
+				width='full'
+				justify='space-between'
+				display={{
+					base: "flex",
+					md: "none",
+				}}>
+				<Link fontSize='sm' textDecor='underline'>
+					Delete
+				</Link>
+				<QuantitySelect
+					value={1}
+					onChange={(e) => {
+						onChangeQuantity?.(+e.currentTarget.value);
+					}}
+				/>
+				<PriceTag price={price} currency={currency} />
+			</Flex>
+		</Flex>
+  );
 }
