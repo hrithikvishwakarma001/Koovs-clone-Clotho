@@ -11,14 +11,14 @@ export default function ProductDetails() {
   const pro = () => {
     setloading(true);
     axios
-      .get(`https://diagnostic-boiled-shift.glitch.me/mens/${id}`)
-      .then((res) => setdata(res.data))
+      .get(`https://clothoapi.onrender.com/api/products/all/${id}`)
+      .then((res) => setdata(res.data.product))
       .catch((err) => console.log(err))
       .finally(() => {
         setloading(false);
       });
   };
-  console.log("dataPrrr",data)
+ // console.log("dataPrrr",data)
   useEffect(() => {
     pro();
   }, []);
@@ -37,7 +37,7 @@ export default function ProductDetails() {
   }
   return (
     <div>
-      <SingleProductPageCardMaker {...data} />
+      <SingleProductPageCardMaker  {...data} />
     </div>
   );
 }
