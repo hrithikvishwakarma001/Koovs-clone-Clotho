@@ -28,7 +28,7 @@
 > ### cammands
 
 -   `npm install` to install all dependencies
--   `npm start` to start the server
+-   `npm run server` to start the server
 -   `npm run dev` to start the app in development mode
 
 > ### git commands
