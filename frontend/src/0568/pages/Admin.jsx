@@ -5,6 +5,7 @@ import Heading from "../components/Heading";
 import User  from "../components/user"
 import CustomButton from "../utils/CustomButton";
 import Products from "../components/Products";
+import Orders from "../components/Orders";
 export default function Admin() {
 	const [data, setData] = React.useState("products");
 
@@ -24,6 +25,7 @@ export default function Admin() {
 			{data === "search" && <Cards />}
 			{data === "users" && <Tables />}
 			{data === "products" && <Products />}
+			{data === "orders" && <Orders />}
 		</div>
 	);
 }

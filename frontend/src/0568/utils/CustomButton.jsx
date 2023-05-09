@@ -24,6 +24,9 @@ export default function CustomButton({ setData }) {
 				<Button shadow onClick={() => setData("products")}>
 					Products
 				</Button>
+				<Button shadow onClick={() => setData("orders")}>
+					Orders
+				</Button>
 			</Button.Group>
 		</>
 	);

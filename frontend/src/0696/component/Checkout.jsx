@@ -64,7 +64,7 @@ export default function Checkout({ total, cartData }) {
 			});
 
 			navigate("/product/cart/payment", {
-				state: { address: data, cartData },
+				state: { address: data, cartData, total },
 			});
 			
 		}

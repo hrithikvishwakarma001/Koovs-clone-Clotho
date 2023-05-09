@@ -12,31 +12,33 @@ import {
 import { Link } from "react-router-dom";
 import { CartItem } from "./CartItem";
 import { CartOrderSummary } from "./CartOrderSummary";
-
-
+import { toast } from "react-toastify";
 import { deleteCart, getCart } from "../../../0035/Redux/ProductReducer/action";
 import { ADD_TO_CART } from "../../../0035/Redux/ProductReducer/actionType";
 
 const CartIndex = () => {
 	const { cart } = useSelector((state) => state.ProductReducer);
-	const {token } = useSelector((state) => state.authReducer);
+	const { token } = useSelector((state) => state.authReducer);
+	const [quantity, setQuantity] = React.useState(1);
 	const dispatch = useDispatch();
 	const handleDelete = (id) => {
-		const newCart = cart.filter((item) => item.id !== id);
+		const newCart = cart.filter((item) => item._id !== id);
 		dispatch({ type: ADD_TO_CART, payload: newCart });
-		deleteCart(id);
+		deleteCart(id, token);
+		toast.success("Product deleted from cart");
 	};
 	useEffect(() => {
-		document.title = "Cart";
+		document.title = "cart page";
 		dispatch(getCart(token));
 	}, []);
 
 	const totalWithQuantity = cart.reduce((acc, item) => {
-		item.price = item.price.slice(3).replace(/,/g, "");
-		return acc + Number(item.price);
+		const numericString = item.price.replace(/Rs|,|\./g, "");
+		const priceNumber = parseFloat(numericString);
+		// console.log("priceNumber", priceNumber);
+		return acc + (priceNumber/100) * quantity;
 	}, 0);
-
-	console.log("cart", cart);
+  
 	return (
 		<Box
 			maxW={{
@@ -84,6 +86,9 @@ const CartIndex = () => {
 								key={idx}
 								{...item}
 								onClickDelete={() => handleDelete(item._id)}
+								onChangeQuantity={(quantity) =>
+									setQuantity(quantity)
+								}
 							/>
 						))}
 					</Stack>

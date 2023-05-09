@@ -6,6 +6,7 @@ const prodSchema = mongoose.Schema(
 		credentials: Object,
 		address: Object,
 		cartData: Array,
+		total: Number,
 	},
 	{ versionKey: false, timestamps: true }
 );

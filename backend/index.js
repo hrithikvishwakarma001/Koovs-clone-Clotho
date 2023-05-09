@@ -3,7 +3,6 @@ const app = express();
 const connection = require("./db");
 const userRouter = require("./0568/routers/users.router");
 const adminRouter = require("./0568/routers/admin.router");
-const authentication = require("./0568/authentication/auth");
 const cors = require("cors");
 const { prodRouter } = require("./0210/routers/products.router");
 const { WomenRouter } = require("./0568/routers/women.router");
@@ -26,7 +25,7 @@ app.use("/api/admin", adminRouter);
 app.use("/api/products/men", prodRouter);
 app.use("/api/products/women", WomenRouter);
 app.use("/api/products/all", allProductRouter);
-app.use("/api/orders", authentication, orderRouter);
+app.use("/api/orders", orderRouter);
 app.use("/api/cart", cartMiddleware, cartRouter);
 
 app.listen(3000, async () => {
