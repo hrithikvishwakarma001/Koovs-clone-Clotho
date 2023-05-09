@@ -365,7 +365,7 @@ const NAV_ITEMS = [
 
 
         ],
-        href: '#',
+        href: '/product',
       },
       {
         label: 'Footwear',
@@ -375,7 +375,7 @@ const NAV_ITEMS = [
           { sub: "Slides" }
 
         ],
-        href: '#',
+        href: '/product',
       },
       {
         label: 'Accessories',
@@ -385,7 +385,7 @@ const NAV_ITEMS = [
           { sub: "Pins" }
 
         ],
-        href: '/mens',
+        href: '/product',
       }
     ],
     href: '/product',
@@ -406,7 +406,7 @@ const NAV_ITEMS = [
           { sub: "Co-ord sets" }
         ],
 
-        href: '/womens',
+        href: '/product',
       }
       , {
         label: 'Brands',
@@ -422,7 +422,7 @@ const NAV_ITEMS = [
 
 
         ],
-        href: '/womens',
+        href: '/product',
       },
       {
         label: 'Footwear',
@@ -432,7 +432,7 @@ const NAV_ITEMS = [
           { sub: "Slides" }
 
         ],
-        href: '#',
+        href: '/product',
       },
       {
         label: 'Accessories',
@@ -449,7 +449,7 @@ const NAV_ITEMS = [
   },
   {
     label: 'Learn Design',
-    href: '#',
+    href: '/product',
     children: [
       {
 
@@ -457,7 +457,7 @@ const NAV_ITEMS = [
           { sub: "George Thomasam" },
           { sub: "Boomrang" },
         ],
-        href: '#',
+        href: '/product',
       },
 
     ],
@@ -476,7 +476,7 @@ const NAV_ITEMS = [
           { sub: "Rectograde" },
           { sub: "Fill Grade" }
         ],
-        href: '#',
+        href: '/product',
       },
 
     ],
