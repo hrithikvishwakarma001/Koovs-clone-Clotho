@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Tooltip } from '@chakra-ui/react'
 
 import { Box, Text, Image, Button, background, Center, Heading, SimpleGrid } from "@chakra-ui/react"
 import { useDispatch, useSelector } from "react-redux";
@@ -16,7 +17,7 @@ import toast, { Toaster } from 'react-hot-toast';
 const Home = () => {
   const [data, setdata] = useState(true)
   const [dis, setdis] = useState(false)
-  console.log("dis", dis)
+  
   const [products, setproducts] = useState([])
   const responsive = {
     superLargeDesktop: {
@@ -194,6 +195,7 @@ const Home = () => {
 
             <Box key={index} _hover={{ transform: "scale(0.95)", transition: "all .5s", cursor: "pointer" }}>
               <img onClick={() => navigate(`/details/${e._id}`)} src={e.image[0].src} alt="" />
+              <Tooltip  label='add to wishlist' placement='top-start' bg='gray.300' color='black'>
               <Button onClick={async()=>{try {
 
                 await axios.post(`https://636a17f3c07d8f936d92dd55.mockapi.io/fas`,{
@@ -202,10 +204,11 @@ const Home = () => {
                   category:e.category,
                   image:e.image[0].src
                 })
-                toast.success("Product added to cart")
+                toast.success("Product added to Wishlist")
               } catch (error) {
                 toast.error("Something Wrong")
               } }} marginLeft={"240px"} marginTop={"-280%"} _hover={{ bg: "black", color: "white", transform: "scale(1.2)", transition: "all .3s" }} borderRadius={"50%"} height="45px" padding={"14px"} border="none"><AiOutlineStar size={17} /></Button>
+              </Tooltip>
 
               <Text color="#888181" textAlign={"left"} fontWeight={500} fontSize={10}>{e.category} </Text>
               <Text textAlign={"left"} marginTop={"-1px"} fontWeight={600} fontSize={14}>{e.title}</Text>
@@ -217,7 +220,7 @@ const Home = () => {
 
         </SimpleGrid>
       </Box>
-      <Center><Button _hover={{ bg: "black", color: "white", transform: "scale(1.1)", transition: "all .3s", cursor: "pointer" }} bg="black" color="white" borderRadius={"5px"} border="none" p="12px 30px" fontWeight={500}>View all</Button></Center>
+      <Center><Button _hover={{ bg: "black", color: "white", transform: "scale(1.1)", transition: "all .3s", cursor: "pointer" }} bg="black" color="white" borderRadius={"5px"} border="none" p="12px 30px" fontWeight={500} onClick={() => navigate(`/product`)}>View all</Button></Center>
 
 
       <Center><Box paddingLeft={"50px"} height="90px" marginTop={"30px"} > <Text marginLeft={"-30px"} fontWeight={400} fontSize={33}>Trending now
@@ -295,7 +298,7 @@ const Home = () => {
           </Carousel>
         </Box>}
 
-      <Center><Button marginBottom={"50px"} _hover={{ bg: "black", color: "white", transform: "scale(1.1)", transition: "all .3s", cursor: "pointer" }} bg="black" color="white" borderRadius={"5px"} border="none" p="12px 30px" fontWeight={500}>View all</Button></Center>
+      <Center><Button  onClick={() => navigate(`/product`)} marginBottom={"50px"} _hover={{ bg: "black", color: "white", transform: "scale(1.1)", transition: "all .3s", cursor: "pointer" }} bg="black" color="white" borderRadius={"5px"} border="none" p="12px 30px" fontWeight={500}>View all</Button></Center>
       <Center><Box height="90px" > <Text fontWeight={400} fontSize={33}>Sneaker Edit
       </Text></Box></Center>
 
@@ -351,7 +354,7 @@ const Home = () => {
 
         </SimpleGrid>
       </Box>
-      <Center><Button marginBottom={"50px"} _hover={{ bg: "black", color: "white", transform: "scale(1.1)", transition: "all .3s", cursor: "pointer" }} bg="none" color="black" border="1px solid black" borderRadius={"5px"} p="12px 30px" fontWeight={500}>View all</Button></Center>
+      <Center><Button marginBottom={"50px"} _hover={{ bg: "black", color: "white", transform: "scale(1.1)", transition: "all .3s", cursor: "pointer" }} bg="none" color="black" border="1px solid black" borderRadius={"5px"} p="12px 30px" fontWeight={500} onClick={() => navigate(`/product`)}>View all</Button></Center>
 
 
       <Box marginBottom={"0px"} height="90px" > <Text textAlign={"center"} fontWeight={400} fontSize={33}>Featured products
@@ -387,7 +390,7 @@ const Home = () => {
 
         </SimpleGrid>
       </Box>
-      <Center><Button marginBottom={"50px"} _hover={{ bg: "black", color: "white", transform: "scale(1.1)", transition: "all .3s", cursor: "pointer" }} bg="black" color="white" borderRadius={"5px"} border="none" p="12px 30px" fontWeight={500}>View all</Button></Center>
+      <Center><Button marginBottom={"50px"} _hover={{ bg: "black", color: "white", transform: "scale(1.1)", transition: "all .3s", cursor: "pointer" }} bg="black" color="white" borderRadius={"5px"} border="none" p="12px 30px" fontWeight={500} onClick={() => navigate(`/product`)}>View all</Button></Center>
 
 
 
@@ -432,7 +435,7 @@ const Home = () => {
 
         </SimpleGrid>
       </Box>
-      <Center><Button marginBottom={"50px"} _hover={{ bg: "black", color: "white", transform: "scale(1.1)", transition: "all .3s", cursor: "pointer" }} bg="black" color="white" borderRadius={"5px"} border="none" p="12px 30px" fontWeight={500}>View all</Button></Center>
+      <Center><Button marginBottom={"50px"} _hover={{ bg: "black", color: "white", transform: "scale(1.1)", transition: "all .3s", cursor: "pointer" }} bg="black" color="white" borderRadius={"5px"} border="none" p="12px 30px" fontWeight={500} onClick={() => navigate(`/product`)}>View all</Button></Center>
 
 
 

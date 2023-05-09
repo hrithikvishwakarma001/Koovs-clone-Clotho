@@ -66,31 +66,30 @@ const Search = () => {
     }
     const handleClick = async (e) => {
         e.preventDefault()
-        console.log("query",query)
+
         if (query === "") {
             setResponse("Please enter a valid URL or length");
             return;
         }
-       
+
 
         try {
-            // let data = await ...
-            // console.log(query);
+
             const res = await searchByQuery(query);
-            // console.log("👻 -> file: Card.jsx:22 -> handleClick -> res:", res);
+
             setResponse(res);
-            
-            
+
+
         } catch (error) {
             setResponse("Something went wrong! Please try again later.");
         }
 
-       
+
 
 
     }
 
-    console.log("resss", response)
+
     return (
         <>
             <Button
