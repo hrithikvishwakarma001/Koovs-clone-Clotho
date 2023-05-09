@@ -34,7 +34,6 @@ export default function ProductCard({data}) {
 
     const addProduct = async () => {
      
-        
 
         try {
             const response = await axios.post(`${URL}/cart/create`,data,
@@ -45,9 +44,11 @@ export default function ProductCard({data}) {
                 }
             );
             toast.success("Product added to cart")
+            console.log(response)
             return response
         } catch (error) {
             toast.error("please login first")
+            console.log(error)
             return error.message
         }
     }
