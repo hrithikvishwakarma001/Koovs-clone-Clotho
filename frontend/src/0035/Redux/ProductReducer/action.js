@@ -24,10 +24,10 @@ export const addProduct = (data) => (dispatch) => {
 export const getProduct = (paramObj) => (dispatch) => {
 	dispatch({ type: Product_Req });
 	axios
-		.get(`${BASEURL}/products/men`, paramObj)
+		.get(`https://diagnostic-boiled-shift.glitch.me/mens`, paramObj)
 		.then((res) => {
 			// console.log('👻 -> file: action.js:29 -> .then -> res:', res.data)
-			dispatch({ type: Get_Product_Success, payload: res.data.products });
+			dispatch({ type: Get_Product_Success, payload: res.data });
 		})
 		.catch(() => {
 			dispatch({ type: Product_Failure });
