@@ -388,7 +388,7 @@ const NAV_ITEMS = [
         href: '/product',
       }
     ],
-    href: '/product',
+   
   },
   {
     label: 'Womens',
@@ -445,7 +445,7 @@ const NAV_ITEMS = [
         href: '#',
       }
     ],
-    href: '/product',
+  
   },
   {
     label: 'Learn Design',
