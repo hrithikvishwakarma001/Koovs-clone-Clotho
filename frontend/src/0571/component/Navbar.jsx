@@ -246,7 +246,7 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
 
 
       <Box >
-        <Text
+        <Text 
           transition={'all .3s ease'}
           _groupHover={{ color: 'pink.400' }}
           fontWeight={500}>
@@ -349,7 +349,7 @@ const NAV_ITEMS = [
           { sub: "Co-ord sets" }
         ],
 
-        href: '/mens',
+        href: '/product',
       }
       , {
         label: 'Brands',
@@ -388,7 +388,7 @@ const NAV_ITEMS = [
         href: '/mens',
       }
     ],
-    href: '/mens',
+    href: '/product',
   },
   {
     label: 'Womens',
@@ -445,7 +445,7 @@ const NAV_ITEMS = [
         href: '#',
       }
     ],
-    href: '/womens',
+    href: '/product',
   },
   {
     label: 'Learn Design',
