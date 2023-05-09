@@ -26,7 +26,8 @@ export const getProduct = (paramObj) => (dispatch) => {
 	axios
 		.get(`${BASEURL}/products/men`, paramObj)
 		.then((res) => {
-			dispatch({ type: Get_Product_Success, payload: res.data });
+			// console.log('👻 -> file: action.js:29 -> .then -> res:', res.data)
+			dispatch({ type: Get_Product_Success, payload: res.data.products });
 		})
 		.catch(() => {
 			dispatch({ type: Product_Failure });
