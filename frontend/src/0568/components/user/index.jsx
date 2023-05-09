@@ -25,7 +25,7 @@ export default function App() {
 					<User
 						as='button'
 						src={images[0]}
-						name='Hrithik Vishwakarma'
+						name='admin'
 						description='Full-stack developer'
 					/>
 				</Tooltip>
