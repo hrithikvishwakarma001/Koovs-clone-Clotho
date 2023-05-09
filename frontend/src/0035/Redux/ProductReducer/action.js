@@ -1,7 +1,6 @@
 import axios from "axios";
 import {
 	Get_Product_Success,
-	Patch_product_success,
 	Product_Failure,
 	Product_Req,
 	Product_Success,
@@ -13,7 +12,7 @@ import { BASEURL } from "../../../0568/utils";
 export const addProduct = (data) => (dispatch) => {
 	dispatch({ type: Product_Req });
 	axios
-		.post(`http://localhost:3000/api/products/create`, data)
+		.post(`${BASEURL}/products/men/create`, data)
 		.then(() => {
 			dispatch({ type: Product_Success });
 		})
@@ -25,21 +24,9 @@ export const addProduct = (data) => (dispatch) => {
 export const getProduct = (paramObj) => (dispatch) => {
 	dispatch({ type: Product_Req });
 	axios
-		.get(`https://diagnostic-boiled-shift.glitch.me/mens`, paramObj)
+		.get(`${BASEURL}/products/men`, paramObj)
 		.then((res) => {
 			dispatch({ type: Get_Product_Success, payload: res.data });
-		})
-		.catch(() => {
-			dispatch({ type: Product_Failure });
-		});
-};
-
-export const Patchproduct = (dataObj, id) => (dispatch) => {
-	dispatch({ type: Product_Req });
-	axios
-		.patch(`http://localhost:8080/MenKids/${id}`, dataObj)
-		.then(() => {
-			dispatch({ type: Patch_product_success });
 		})
 		.catch(() => {
 			dispatch({ type: Product_Failure });
@@ -49,7 +36,7 @@ export const Patchproduct = (dataObj, id) => (dispatch) => {
 export const deleteProduct = (id) => (dispatch) => {
 	dispatch({ type: Product_Req });
 	axios
-		.delete(`http://localhost:8080/MenKids/${id}`)
+		.delete(`${BASEURL}/products/men/${id}`)
 		.then(() => {
 			dispatch({ type: Delete_product_success, payload: id });
 		})
@@ -74,9 +61,13 @@ export const getCart = (token) => (dispatch) => {
 		});
 };
 
-export const deleteCart = (id) => {
+export const deleteCart = (id, token) => {
 	return axios
-		.delete(`${BASEURL}/cart/delete/${id}`)
+		.delete(`${BASEURL}/cart/delete/${id}`, {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		})
 		.then(() => {
 			console.log("data deleted from cart", id);
 		})
@@ -105,4 +96,20 @@ export const addToCart = (id, token) => (dispatch) => {
 	} catch (error) {
 		console.log(error);
 	}
+};
+
+export const addOrder = (data, token) => {
+	return axios
+		.post(`${BASEURL}/orders/create`, data, {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		})
+		.then((res) => {
+			console.log("order data", res.data);
+			return res.data;
+		})
+		.catch((err) => {
+			console.log(err.message);
+		});
 };

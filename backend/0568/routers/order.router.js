@@ -3,8 +3,9 @@ const { Router } = require("express");
 const orderRouter = Router();
 const { OderModel } = require("../models/oders.model");
 const e = require("express");
+const authentication = require("../authentication/auth");
 
-orderRouter.post("/create", async (req, res) => {
+orderRouter.post("/create", authentication, async (req, res) => {
 	try {
 		const data = new OderModel(req.body);
 		await data.save();
@@ -17,7 +18,7 @@ orderRouter.post("/create", async (req, res) => {
 	}
 });
 
-orderRouter.get("/", async (req, res) => {
+orderRouter.get("/admin", async (req, res) => {
 	try {
 		const orders = await OderModel.find();
 		res.json({
@@ -33,4 +34,4 @@ orderRouter.get("/", async (req, res) => {
 	}
 });
 
-module.exports = {orderRouter};
+module.exports = { orderRouter };

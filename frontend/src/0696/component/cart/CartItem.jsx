@@ -1,35 +1,42 @@
-import { CloseButton, Flex, Link, Select, useColorModeValue } from '@chakra-ui/react'
-import { PriceTag } from './PriceTag'
-import { CartProductMeta } from './CartProductMeta'
+import {
+	CloseButton,
+	Flex,
+	Link,
+	Select,
+	useColorModeValue,
+} from "@chakra-ui/react";
+import { PriceTag } from "./PriceTag";
+import { CartProductMeta } from "./CartProductMeta";
 const QuantitySelect = (props) => {
-  return (
-    <Select
-      maxW="64px"
-      aria-label="Select quantity"
-      focusBorderColor={useColorModeValue('blue.500', 'blue.200')}
-      {...props}
-    >
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-    </Select>
-  )
-}
+	return (
+		<Select
+			maxW='64px'
+			aria-label='Select quantity'
+			focusBorderColor={useColorModeValue("blue.500", "blue.200")}
+			{...props}>
+			<option value='1'>1</option>
+			<option value='2'>2</option>
+			<option value='3'>3</option>
+			<option value='4'>4</option>
+		</Select>
+	);
+};
 
 export const CartItem = (props) => {
-  const {
-    isGiftWrapping,
-    name,
-    _id,
-    title,
-    image,
-    currency,
-    price,
-    onChangeQuantity,
-    onClickDelete,
-  } = props
-  return (
+	const {
+		isGiftWrapping,
+		name,
+		_id,
+		title,
+		image,
+		currency,
+		price,
+		onChangeQuantity,
+		onClickDelete,
+	} = props;
+		const numericString = price.replace(/Rs|,|\./g, "");
+		const priceNumber = parseFloat(numericString)/100;
+	return (
 		<Flex
 			direction={{
 				base: "column",
@@ -53,12 +60,12 @@ export const CartItem = (props) => {
 					md: "flex",
 				}}>
 				<QuantitySelect
-					value={1}
+					// value={1}
 					onChange={(e) => {
 						onChangeQuantity?.(+e.currentTarget.value);
 					}}
 				/>
-				<PriceTag price={price} currency={currency} />
+				<PriceTag price={priceNumber} currency={currency} />
 				<CloseButton
 					aria-label={`Delete ${title} from cart`}
 					onClick={onClickDelete}
@@ -79,13 +86,17 @@ export const CartItem = (props) => {
 					Delete
 				</Link>
 				<QuantitySelect
-					value={1}
+					// value={1}
 					onChange={(e) => {
 						onChangeQuantity?.(+e.currentTarget.value);
 					}}
 				/>
-				<PriceTag price={price} currency={currency} />
+				<PriceTag
+					price={price}
+					currency={currency}
+					salePrice={price * 0.8}
+				/>
 			</Flex>
 		</Flex>
-  );
-}
+	);
+};
