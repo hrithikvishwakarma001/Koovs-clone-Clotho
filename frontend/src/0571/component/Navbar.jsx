@@ -154,7 +154,7 @@ const wishdata=wish.length
     </Tooltip>
      
     <Tooltip hasArrow label='Account' bg='gray.300' color='black'>
-           <Box paddingTop={"7px"} onClick={() => navigate("/login")}><BsFillPersonFill size={25} /></Box> 
+           <Box paddingTop={"7px"} onClick={() => navigate("/login")}_hover={{ cursor: "pointer" }}><BsFillPersonFill size={25} /></Box> 
            </Tooltip>
            <Tooltip hasArrow label='Wishlist' bg='gray.300' color='black'>
             <Box onClick={() =>{ 
