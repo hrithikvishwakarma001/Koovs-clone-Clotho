@@ -335,7 +335,7 @@ const NAV_ITEMS = [
           { sub: "Co-ord sets" }
         ],
 
-        href: '/mens',
+        href: '/product',
       }
       , {
         label: 'Brands',

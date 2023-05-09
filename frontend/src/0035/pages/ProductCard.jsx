@@ -10,6 +10,8 @@ const priceNumber = parseFloat(price.replace(/[^\d.-]/g, "").replace(",", "").su
     
   return (
     <DIV>
+      
+      
       <img src={image[0].src} />
      
       <h3>{title}</h3>

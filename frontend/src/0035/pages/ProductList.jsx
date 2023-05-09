@@ -58,11 +58,16 @@ export const Productlist = () => {
         <Button onClick={() => handleColumnsChange(2)}>||</Button>
       </ButtonContainer>
       <ProductList columns={columns}>
-        {products.length > 0 &&
-          products.map((el) => {
-            return <Productcard key={el.articleCode} {...el} />;
-          })}
-      </ProductList>
+  {products.length > 0 &&
+    products.map((el) => {
+      return (
+        <div style={{ width: '100%' }} key={el.articleCode}>
+          <Productcard {...el} />
+        </div>
+      );
+    })}
+</ProductList>
+
 
       <Paginate
         totalPages={totalPages}
@@ -79,24 +84,37 @@ const ProductList = styled.div`
   grid-gap: 25px;
   padding: 40px;
   background-color: #fff;
-  
- 
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(3, minmax(250px, 1fr));
+    padding: 30px;
+    grid-gap: 20px;
+  }
 
   @media (max-width: 768px) {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
     padding: 20px;
-    grid-gap: 20px;
-    margin: 0 20px;
+    grid-gap: 15px;
+    margin: 0 10px;
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: repeat(1, minmax(150px, 1fr));
+    padding: 15px;
+    grid-gap: 10px;
+    width: 100%;
   }
 `;
-
 
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
-  margin-right:40px
-`;
+  margin-right: 20px;
 
+  @media (max-width: 768px) {
+    margin-right: 10px;
+  }
+`;
 
 const Button = styled.button`
   margin: 0 10px;
@@ -107,5 +125,10 @@ const Button = styled.button`
   cursor: pointer;
   &:hover {
     background-color: #ccc;
+  }
+
+  @media (max-width: 768px) {
+    margin: 0 5px;
+    padding: 8px;
   }
 `;

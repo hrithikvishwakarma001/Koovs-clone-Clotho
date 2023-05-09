@@ -18,7 +18,7 @@ const AllRoutes = () => {
 			<Route path='/signup' element={<Signup />} />
 			<Route path='/admin/dashboard' element={<NextUIAdminPage />} />
 			<Route path='/cart' element={<Cart />} />
-			<Route path='/product' element={<Productlist />} />
+			<Route path='/product/men' element={<Productlist />} />
 			<Route path='/product/cart/payment' element={<Payment />} />
 			<Route path='*' element={<h1>404 Not Found</h1>} />
 		</Routes>
