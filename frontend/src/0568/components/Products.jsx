@@ -12,7 +12,6 @@ import {
 } from "@nextui-org/react";
 import { StyledBadge } from "./Table/StyledBadge";
 import { IconButton } from "./Table/IconButton";
-import { EyeIcon } from "./Table/EyeIcon";
 import { DeleteIcon } from "./Table/DeleteIcon";
 import { getProducts, deleteProduct } from "../api/products.api";
 import React from "react";
@@ -151,7 +150,8 @@ export default function Products() {
 				height: "auto",
 				minWidth: "100%",
 			}}
-			selectionMode='none'>
+			selectionMode='none'
+			>
 			<Table.Header columns={columns}>
 				{(column) => {
 					return column.uid === "actions" ? (
