@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Box, Text, Image, Button, background, Center, Heading, SimpleGrid } from "@chakra-ui/react"
+import { Tooltip } from '@chakra-ui/react'
+
 import { FiArrowRight } from "react-icons/fi"
 import { AiOutlineStar } from "react-icons/ai"
 import Footer from "../component/Footer"
@@ -56,11 +58,14 @@ const Wishlist = () => {
 
                     {data.map((e) => <Box _hover={{ transform: "scale(0.95)", transition: "all .5s", cursor: "pointer" }}>
                         <img style={{ height: "400px" }} src={e.image} alt="" />
+                        <Tooltip  label='Removed to wishlist' placement='top-start' bg='gray.300' color='black'>
+
                         <Button onClick={async()=> {
 await axios.delete(`https://636a17f3c07d8f936d92dd55.mockapi.io/fas/${e.id}`)
 setupdate(!update)
 toast.success("Product Removed")
                         } }  marginLeft={"200px"} marginTop={"-240%"} _hover={{ bg: "black", color: "white", transform: "scale(1.2)", transition: "all .3s" }} borderRadius={"50%"} height="45px" padding={"14px"} border="none"><AiOutlineStar size={17} /></Button>
+                        </Tooltip>
                         <Text color="#888181" textAlign={"left"} fontWeight={500} fontSize={10}>{e.category} </Text>
                         <Text textAlign={"left"} marginTop={"-1px"} fontWeight={600} fontSize={14}>{e.title}</Text>
                         <Text textAlign={"left"} marginTop={"-1px"} fontWeight={400} fontSize={13}>{e.price}</Text>

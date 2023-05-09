@@ -2,7 +2,7 @@
 
 
 
-import WithSubnavigation from "./0571/component/Nav2"
+import WithSubnavigation from "./0571/component/Navbar"
 import AllRoutes from "./router/AllRoutes";
 
 
