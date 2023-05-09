@@ -2,12 +2,14 @@ import React from "react";
 import "./checkout.css";
 import { Center, useToast } from "@chakra-ui/react";
 import { useLocation, useNavigate } from "react-router-dom";
-
+import { useSelector } from "react-redux";
+import { addOrder } from "../../0035/Redux/ProductReducer/action";
 const Payment = () => {
 	const location = useLocation();
 	const toast = useToast();
 	const navigate = useNavigate();
 	// console.log('from payment',location.state)
+	const { token } = useSelector((state) => state.authReducer);
 	const [cardData, setCardData] = React.useState({
 		cardNumber: "",
 		cardName: "",
@@ -48,7 +50,8 @@ const Payment = () => {
 				duration: 1000,
 				isClosable: true,
 			});
-			console.log(mainData);
+		console.log(mainData,token)
+			addOrder(mainData, token);
 			navigate("/");
 		}
 	};

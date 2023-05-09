@@ -69,13 +69,12 @@
 
 ### orders
 
--   `Auth required` for all orders routes
--   `GET /api/orders` to get all orders
--   `POST /api/orders/create` to create a new order
+-   `GET /api/orders` only admin can access this route
+-   `POST /api/orders/create` to create a new order `Authentication required`
 
 ### cart
 
--   `Auth required` for all cart routes
+-   `Authentication required` for all cart routes
 -   `GET /api/cart` to get all cart items of user
 -   `GET /api/cart/admin` to get all cart items of all user
 -   `GET /api/cart/:id` to get a cart item by id
