@@ -73,7 +73,7 @@ export default function Orders() {
 						p: "20px",
 					}}>
 					{products &&
-						products.map((product, index) => (
+						products.reverse().map((product, index) => (
 							<Collapse
 								key={product._id}
 								title={
