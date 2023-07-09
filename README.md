@@ -78,3 +78,7 @@
 -   `git merge <branch-name>` to merge a branch to current branch
 -   `git status` to check the status of the repo
 
+### Admin login credentials
+
+-  `admin@gmail.com` Admin Email
+-  `admin1432` Admin Password
